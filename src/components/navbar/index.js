@@ -7,10 +7,9 @@ class NavBar extends React.Component {
     render() {
         return (
 
-  
-            <nav class="navbar has-shadow">
+            <nav class="navbar is-black is-spaced">
 
-                <div class="navbar-brand">
+                <div class="navbar-brand" style={{marginLeft : 110}}>
                     <a class="navbar-item" href="https://bulma.io">
                     <img src={ SwopLogo } style={{width: 50 , height: 200 }}></img>
                     
@@ -21,20 +20,24 @@ class NavBar extends React.Component {
                     <span></span>
                     <span></span>
                     </div>
+                    <a class="navbar-item is-size-7" href="https://bulma.io/">
+                        How it works
+                    </a>
+                    <a class="navbar-item is-size-7" href="https://bulma.io/">
+                        Team
+                    </a>
+                    <a class="navbar-item is-size-7" href="https://bulma.io/">
+                        About
+                    </a>
                 </div>
-                <div class="control">
-                    <input class="input is-small" type="text" placeholder="Search flights"></input>
-                </div>
-                <div id="navbarExampleTransparentExample" class="navbar-menu">
+
+                <div id="navbarExampleTransparentExample" class="navbar-menu" style={{marginRight:110}}>
                     <div class="navbar-end">
                     <Link class="navbar-item is-size-7" to="/sell">
                         Sell Ticket
                     </Link>
                     <a class="navbar-item is-size-7" href="https://bulma.io/">
                         Listings
-                    </a>
-                    <a class="navbar-item is-size-7" href="https://bulma.io/">
-                        Purchases
                     </a>
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link is-size-7" href="https://bulma.io/documentation/overview/start/">
@@ -45,7 +48,7 @@ class NavBar extends React.Component {
                             Overview
                         </a>
                         <a class="navbar-item is-size-7" href="https://bulma.io/documentation/modifiers/syntax/">
-                            Modifiers
+                            Purchases
                         </a>
                         <a class="navbar-item is-size-7" href="https://bulma.io/documentation/columns/basics/">
                             Columns

@@ -2,75 +2,33 @@ import React from 'react'
 import 'bulma'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Footer from '../footer'
+import FlightInfo from './flight'
 
 class TicketDetails extends React.Component {
+
+    constructor(props){
+        super(props)
+        this.data = {
+            flightDate : "Monday, August 19th, 2019",
+            origin : "Toronto",
+            originAirportCode: "YYZ",
+            destination : "New York",
+            destinatioAirportCode: "JFK",
+            departureTime : "06:30",
+            arrivalTime : "10:30"
+
+        }
+    }
     render() {
         return (
             <div style={{margin : 10}}>
                 <div class="columns">
                     <div class="column is-two-thirds">
                     <p class="title is-5">Flight Details</p>
-                        <p>Departing flight</p>
-                            <article class="message is-small is-dark">
-                            <div class="message-header">
-                            <p>Monday, August 19th, 2019</p>
-                            <span style={{float : 'right'}}> Toronto, CA(YYZ) - New York, USA(JFK)</span>
-                            </div>
-                            <div class="message-body">
-                                <div class="level">
-                                    <div class="level-item has-text-centered">
-                                        <div>
-                                        <p class="heading">Toronto (YYZ)</p>
-                                        <p class="title">06:30</p>
-                                        </div>
-                                    </div>
-                                    <div class="level-item has-text-centered">
-                                        <div>
-                                        <p class="heading">Non-stop (1h30m)</p>
-                                        <p class="title">>>></p>
-                                        </div>
-                                    </div>
-                                    <div class="level-item has-text-centered">
-                                        <div>
-                                        <p class="heading">New York (JFK)</p>
-                                        <p class="title">10:30</p>
-                                        </div>
-                                    </div>
 
-                                </div>
-                            </div>
-                            </article>
-
-                        <p>Return flight</p>
-                            <article class="message is-small is-dark">
-                            <div class="message-header">
-                            <p>Monday, August 19th, 2019</p>
-                            <span style={{float : 'right'}}> Toronto, CA(YYZ) - New York, USA(JFK)</span>
-                            </div>
-                            <div class="message-body">
-                            <div class="level">
-                                    <div class="level-item has-text-centered">
-                                        <div>
-                                        <p class="heading">Toronto (YYZ)</p>
-                                        <p class="title">06:30</p>
-                                        </div>
-                                    </div>
-                                    <div class="level-item has-text-centered">
-                                        <div>
-                                        <p class="heading">Non-stop (1h30m)</p>
-                                        <p class="title">>>></p>
-                                        </div>
-                                    </div>
-                                    <div class="level-item has-text-centered">
-                                        <div>
-                                        <p class="heading">New York (JFK)</p>
-                                        <p class="title">10:30</p>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            </article>
+                        <FlightInfo title="Departing Flight" data={this.data}/>
+                        <br></br>
+                        <FlightInfo title="Return Flight" data={this.data}/>
 
                         <p class="title is-5">Bids</p>
                         <div class="box">
