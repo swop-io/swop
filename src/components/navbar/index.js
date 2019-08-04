@@ -10,7 +10,7 @@ class NavBar extends React.Component {
             <nav class="navbar is-black is-spaced">
 
                 <div class="navbar-brand" style={{marginLeft : 110}}>
-                    <a class="navbar-item" href="https://bulma.io">
+                    <a class="navbar-item" href="/">
                     <img src={ SwopLogo } style={{width: 50 , height: 200 }}></img>
                     
                     </a>
@@ -24,10 +24,10 @@ class NavBar extends React.Component {
                         How it works
                     </a>
                     <a class="navbar-item is-size-7" href="https://bulma.io/">
-                        Team
+                        About
                     </a>
                     <a class="navbar-item is-size-7" href="https://bulma.io/">
-                        About
+                        Partner with Us
                     </a>
                 </div>
 

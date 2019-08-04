@@ -1,0 +1,34 @@
+[
+    {
+        "swopRefNo" : "1",
+        "destination" : "Calgary",
+        "departureDateTime" : "August 17, 2019 3:00 PM",
+        "returnDateTime" : "August 20, 2019 5:00 PM",
+        "airline" : "Air Canada",
+        "amount" : 500
+    },
+    {
+        "swopRefNo" : "2",
+        "destination" : "Ottawa",
+        "departureDateTime" : "August 17, 2019 3:00 PM",
+        "returnDateTime" : "August 20, 2019 5:00 PM",
+        "airline" : "Air Canada",
+        "amount" : 500
+    },
+    {
+        "swopRefNo" : "3",
+        "destination" : "Montreal",
+        "departureDateTime" : "August 17, 2019 3:00 PM",
+        "returnDateTime" : "August 20, 2019 5:00 PM",
+        "airline" : "Air Canada",
+        "amount" : 500
+    },
+    {
+        "swopRefNo" : "4",
+        "destination" : "New York",
+        "departureDateTime" : "August 17, 2019 3:00 PM",
+        "returnDateTime" : "August 20, 2019 5:00 PM",
+        "airline" : "Air Canada",
+        "amount" : 500
+    }
+]

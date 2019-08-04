@@ -4,6 +4,15 @@ import DummyImage from '../../images/3.png'
 
 class CardView extends React.Component {
 
+    constructor(props){
+        super(props)
+
+        this.state = {
+            data : props.data
+        }
+
+    }
+
     render() {
         return (
             <div class="card" style={{width: 200, margin : 10}}>
@@ -14,42 +23,24 @@ class CardView extends React.Component {
             </div>
             <div class="card-content">
             <p>
-                Calgary
+                {this.state.data.destination}
             </p>
             <p class="is-size-7">
-              August 17, 2019 3:00 PM
+                {this.state.data.departureDateTime}
             </p>
             <p class="is-size-7">
-              August 20, 2019 5:00 PM
+                {this.state.data.returnDateTime}
             </p>
             <p class="is-size-7">
-              Air Canada
+                {this.state.data.airline}
             </p>
-              {/* <div class="media">
-                <div class="media-left">
-                  <figure class="image is-48x48">
-                    <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image"></img>
-                  </figure>
-                </div>
-                <div class="media-content">
-                  <p class="title is-4">John Smith</p>
-                  <p class="subtitle is-6">@johnsmith</p>
-                </div>
-              </div> */}
-          
-              <div class="content">
-                {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                <a href="#">#css</a> <a href="#">#responsive</a>
-                <br></br>
-                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time> */}
-              </div>
 
+        
             </div>
+
             <footer class="card-footer">
-                <p class="card-footer-item subtitle">
-                  $500 ( 2.01 ETH )
-                </p>
+              <a href="/details" class="card-footer-item is-7">View</a>
+ 
             </footer>
           </div>
         )

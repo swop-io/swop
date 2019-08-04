@@ -6,6 +6,9 @@ class Recommendations extends React.Component {
 
     constructor(props){
         super(props)
+        this.state = {
+            list : props.list
+        }
     }
      
     render() {
@@ -15,10 +18,11 @@ class Recommendations extends React.Component {
                     {this.props.title}
                 </h1>
                 <ul>
-                <li><CardView/></li>
-                <li><CardView/></li>
-                <li><CardView/></li>
-                <li><CardView/></li>
+
+                <li><CardView data={this.state.list[0]}/></li>
+                <li><CardView data={this.state.list[1]}/></li>
+                <li><CardView data={this.state.list[2]}/></li>
+                <li><CardView data={this.state.list[3]}/></li>
                 </ul>
 
         
