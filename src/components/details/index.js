@@ -3,6 +3,9 @@ import 'bulma'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Footer from '../footer'
 import FlightInfo from './flight'
+import BidHistory from './history'
+import AuctionSetup from './auction'
+import Deposit from './deposit'
 
 class TicketDetails extends React.Component {
 
@@ -18,7 +21,20 @@ class TicketDetails extends React.Component {
             arrivalTime : "10:30"
 
         }
+
+        this.state = {
+            showAuction : false,
+            hasAccountSetup : false
+        }
+        this.showHideAuction = this.showHideAuction.bind(this)
     }
+
+    showHideAuction(){
+        this.setState(state => ({
+            showAuction : !state.showAuction
+        }))
+    }
+    
     render() {
         return (
             <div style={{margin : 10}}>
@@ -62,46 +78,8 @@ class TicketDetails extends React.Component {
                                     </div>
                                 </div>
 
-
-                        <p>Bid History</p>
-                        <table class="table is-fullwidth">
-                            <thead>
-                                <tr>
-                                <th>User</th>
-                                <th>Datetime</th>
-                                <th>Amount (USD)</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <tr>
-
-                                <td>0xE5CDaa796A8A...</td>
-                                <td>08/03/2019 - 20:00:00</td>
-                                <td>200</td>
-                                </tr>
-                                <tr>
-                                
-                                <td>0xE5CDaa796A8A...</td>
-                                <td>08/03/2019 - 20:00:00</td>
-                                <td>180</td>
-                                </tr>
-                                <tr>
-                                
-                                    <td>0xE5CDaa796A8A...</td>
-                                <td>08/03/2019 - 20:00:00</td>
-                                <td>150</td>
-                                </tr>
-                                <tr>
-                                
-                                <td>0xE5CDaa796A8A...</td>
-                                <td>08/03/2019 - 20:00:00</td>
-                                <td>100</td>
-                                </tr>
-
-
-                            </tbody>
-                        </table>
+                        <BidHistory/>
+                        
                         </div>
                     </div>
                     
@@ -114,7 +92,26 @@ class TicketDetails extends React.Component {
 
                                 <a class="button is-fullwidth is-black">Purchase</a>
                                 <p>OR</p>
-                                <a class="button is-fullwidth">Join Auction</a>
+                                <a class="button is-fullwidth" onClick={this.showHideAuction}>
+                                    {this.state.showAuction ? 'Cancel' : 'Join Auction'}
+                                </a>
+
+                                { this.state.showAuction ? 
+                                    <div>
+                                        <hr></hr>
+                                        <AuctionSetup hasAccountSetup={this.state.hasAccountSetup}/> 
+                                    </div>
+                                    : "" 
+                                    
+                                    }
+                                
+                                { this.state.hasAccountSetup && this.state.showAuction ?
+                                    <div>
+                                        <hr></hr>
+                                        <Deposit/> 
+                                    </div>
+                                    : "" }
+                               
                             </div>
                             
                         </div>
