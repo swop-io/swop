@@ -5,7 +5,7 @@ import Footer from '../footer'
 import FlightInfo from './flight'
 import BidHistory from './history'
 import AuctionSetup from './auction'
-import Deposit from './deposit'
+import Constants from '../../utils/constants'
 
 class TicketDetails extends React.Component {
 
@@ -26,8 +26,16 @@ class TicketDetails extends React.Component {
             showAuction : false,
             hasAccountSetup : false
         }
+
         this.showHideAuction = this.showHideAuction.bind(this)
+        this.checkWalletStatus = this.checkWalletStatus.bind(this)
+        
     }
+
+    componentDidMount(){
+        this.checkWalletStatus()
+    }
+
 
     showHideAuction(){
         this.setState(state => ({
@@ -35,6 +43,19 @@ class TicketDetails extends React.Component {
         }))
     }
     
+    checkWalletStatus(){
+        if(typeof(Storage) !== "undefined"){
+            let pk = localStorage.getItem(Constants.LS_KEY_PK) 
+            if(pk === null || pk === 'undefined'){
+                this.setState({hasAccountSetup : false})
+            }else{
+                this.setState({hasAccountSetup : true})
+            }
+        }else{
+            console.log('web storage not supported')
+        }
+    }
+
     render() {
         return (
             <div style={{margin : 10}}>
@@ -104,13 +125,6 @@ class TicketDetails extends React.Component {
                                     : "" 
                                     
                                     }
-                                
-                                { this.state.hasAccountSetup && this.state.showAuction ?
-                                    <div>
-                                        <hr></hr>
-                                        <Deposit/> 
-                                    </div>
-                                    : "" }
                                
                             </div>
                             

@@ -6,6 +6,7 @@ class Deposit extends React.Component {
     render() {
         return (
             <div>
+                <form>
                 <div class="field">
                     <p class="control has-icons-left">
                         <input class="input" placeholder="Enter amount to deposit"></input>
@@ -21,6 +22,7 @@ class Deposit extends React.Component {
                         </button>
                     </p>
                 </div>
+                </form>
             </div>
         )
     }
