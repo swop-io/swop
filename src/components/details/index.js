@@ -8,6 +8,7 @@ import AuctionSetup from './auction'
 import Constants from '../../utils/constants'
 import CryptoJS from 'crypto-js';
 import * as ethers from 'ethers';
+import APIService from '../../data/remote'
 
 class TicketDetails extends React.Component {
 
@@ -34,6 +35,8 @@ class TicketDetails extends React.Component {
         this.showHideAuction = this.showHideAuction.bind(this)
         this.checkWalletStatus = this.checkWalletStatus.bind(this)
         this.placeBid = this.placeBid.bind(this)
+
+        this.apiService = new APIService()
     }
 
     componentDidMount(){
@@ -83,6 +86,22 @@ class TicketDetails extends React.Component {
         console.log(`r: ${splitSig.r}`);
         console.log(`s: ${splitSig.s}`);
         console.log(`v: ${splitSig.v}`);
+
+        let param = {
+            swopRefNo : hash,
+            lowestAskAmount : 250,
+            maxAskAmount : 500,
+            bidAmount : 253,
+            user : "0xE5CDaa796A8AA9009FEBA23395f5FC083e462283",
+            signature : {
+                r : splitSig.r,
+                s : splitSig.s,
+                v : splitSig.v
+            }
+        }
+
+        let response = await this.apiService.placeBid(param)
+        console.log(response)
     }
 
     render() {

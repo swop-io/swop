@@ -1,6 +1,6 @@
 import DevConfig from '../../config/dev.json'
 import ProdConfig from '../../config/prod.json'
-require('dotenv').config()
+import config from '../../config/config.json'
 
 const ENDPOINT_VERIFY_TICKET    = 'verifyTicket'
 const ENDPOINT_SEARCH           = 'search'
@@ -9,8 +9,8 @@ const ENDPOINT_PLACE_BID        = 'placeBid'
 export default class APIService {
 
     constructor(){
-        this.config = (process.env.FLAVOR === 'DEV') ? DevConfig : ProdConfig
-        this.baseUrl = `${this.config.url}/${this.config.port}`
+        this.config = (config.flavor === 'dev') ? DevConfig : ProdConfig
+        this.baseUrl = `${this.config.url}:${this.config.port}`
     }
 
     search(param){
