@@ -6,6 +6,8 @@ import FlightInfo from './flight'
 import BidHistory from './history'
 import AuctionSetup from './auction'
 import Constants from '../../utils/constants'
+import CryptoJS from 'crypto-js';
+import * as ethers from 'ethers';
 
 class TicketDetails extends React.Component {
 
@@ -24,12 +26,14 @@ class TicketDetails extends React.Component {
 
         this.state = {
             showAuction : false,
-            hasAccountSetup : false
+            hasAccountSetup : false,
+            wallet : undefined,
+            hasWallet : false
         }
 
         this.showHideAuction = this.showHideAuction.bind(this)
         this.checkWalletStatus = this.checkWalletStatus.bind(this)
-        
+        this.placeBid = this.placeBid.bind(this)
     }
 
     componentDidMount(){
@@ -54,6 +58,31 @@ class TicketDetails extends React.Component {
         }else{
             console.log('web storage not supported')
         }
+    }
+
+    async placeBid(){
+        const encryptedPK = localStorage.getItem(Constants.LS_KEY_PK);
+        const hashKey = localStorage.getItem(Constants.LS_KEY_PASSWORD)
+        const bytes = CryptoJS.AES.decrypt(encryptedPK, hashKey);
+        const plainText = bytes.toString(CryptoJS.enc.Utf8);
+
+        let amountWei = ethers.utils.parseEther('1.0')
+        let hash = "0x3ea2f1d0abf3fc66cf29eebb70cbd4e7fe762ef8a09bcc06c8edf641230afec0";
+
+        let message = ethers.utils.concat([
+                        ethers.utils.hexZeroPad(ethers.utils.hexlify(amountWei), 32),
+                        ethers.utils.hexZeroPad(hash, 32),
+        ])
+
+        let messageHash = ethers.utils.keccak256(message)
+
+        let x = new ethers.Wallet(plainText)
+        let sig = await x.signMessage(ethers.utils.arrayify(messageHash));
+        let splitSig = ethers.utils.splitSignature(sig);
+    
+        console.log(`r: ${splitSig.r}`);
+        console.log(`s: ${splitSig.s}`);
+        console.log(`v: ${splitSig.v}`);
     }
 
     render() {
@@ -94,7 +123,7 @@ class TicketDetails extends React.Component {
                                         <input class="input is-small" style={{width : 100}} type="text" placeholder="Amount in USD"></input>
                                        
                                         </div>
-                                        <button class="button is-black is-small is-pulled-right">Place Bid</button>
+                                        <button class="button is-black is-small is-pulled-right" onClick={this.placeBid}>Place Bid</button>
                                         </div>
                                     </div>
                                 </div>

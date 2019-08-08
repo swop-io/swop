@@ -2,6 +2,8 @@ import React from 'react'
 import 'bulma'
 import Constants from '../../utils/constants'
 import Deposit from './deposit'
+import { keccak512 } from 'js-sha3';
+import CryptoJS from 'crypto-js';
 
 class AuctionSetup extends React.Component {
 
@@ -28,9 +30,12 @@ class AuctionSetup extends React.Component {
 
     storeWallet(){
         if(typeof(Storage) !== "undefined"){
-            // TODO encrypt PK with PW
-            localStorage.setItem(Constants.LS_KEY_PK, this.state.inputPK)
-            localStorage.setItem(Constants.LS_KEY_PASSWORD, this.state.inputPW)
+
+            const hashKey = keccak512(this.state.inputPW)
+            const encryptedPK = CryptoJS.AES.encrypt(this.state.inputPK, hashKey);
+
+            localStorage.setItem(Constants.LS_KEY_PK, encryptedPK)
+            localStorage.setItem(Constants.LS_KEY_PASSWORD, hashKey)
             this.setState({hasAccountSetup : true})
         }else{
             console.log('browser not support web storage')
