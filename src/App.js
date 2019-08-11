@@ -15,7 +15,7 @@ function App() {
           <div class="column"></div>
           <div class="column is-three-quarters">
               <Route exact path = "/" component = { Home } />
-              <Route path = "/details" component = { TicketDetails }/>
+              <Route path = "/details/:id" component = { TicketDetails }/>
               <Route path = "/sell" component = { SellTicket } />
               <Route path = "/topics" component = { Topics } />
           </div>

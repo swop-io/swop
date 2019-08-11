@@ -5,7 +5,12 @@ class FlightInfo extends React.Component {
 
     constructor(props){
         super(props)
-
+        // arrivalDateTime: "August 17, 2019 6:00 PM",
+        // departureDateTime: "August 17, 2019 3:00 PM",
+        // destination: "New York",
+        // destinationAirportCode: "JFK",
+        // origin: "Toronto",
+        // originAirportCode: "YYZ"
         this.state = { 
             title : props.title,
             data : props.data }
@@ -19,7 +24,7 @@ class FlightInfo extends React.Component {
                         <div class="message-header">
                             <p>{this.state.data.flightDate}</p>
                             <span style={{float : 'right'}}>{this.state.data.origin} ({this.state.data.originAirportCode}) 
-                                                - {this.state.data.destination}({this.state.data.destinatioAirportCode})</span>
+                                                - {this.state.data.destination}({this.state.data.destinationAirportCode})</span>
                             </div>
                             <div class="message-body">
                                 <div class="level">
@@ -37,7 +42,7 @@ class FlightInfo extends React.Component {
                                     </div>
                                     <div class="level-item has-text-centered">
                                         <div>
-                                        <p class="heading">{this.state.data.destination} ({this.state.data.destinatioAirportCode})</p>
+                                        <p class="heading">{this.state.data.destination} ({this.state.data.destinationAirportCode})</p>
                                         <p class="title">{this.state.data.arrivalTime}</p>
                                         </div>
                                     </div>

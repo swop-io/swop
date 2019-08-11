@@ -19,7 +19,7 @@ class TicketDetails extends React.Component {
             origin : "Toronto",
             originAirportCode: "YYZ",
             destination : "New York",
-            destinatioAirportCode: "JFK",
+            destinationAirportCode: "JFK",
             departureTime : "06:30",
             arrivalTime : "10:30"
 
@@ -29,7 +29,28 @@ class TicketDetails extends React.Component {
             showAuction : false,
             hasAccountSetup : false,
             wallet : undefined,
-            hasWallet : false
+            hasWallet : false,
+            data : {
+                airline : "temp",
+                amount : "temp",
+                depart : {
+                    arrivalDateTime: "August 17, 2019 6:00 PM",
+                    departureDateTime: "August 17, 2019 3:00 PM",
+                    destination: "New York",
+                    destinationAirportCode: "JFK",
+                    origin: "Toronto",
+                    originAirportCode: "YYZ"
+                },
+                return: {
+                    arrivalDateTime: "August 20, 2019 3:00 PM",
+                    departureDateTime: "August 20, 2019 12:00 PM",
+                    destination: "Toronto",
+                    destinationAirportCode: "YYZ",
+                    origin: "New York",
+                    originAirportCode: "JFK"
+                },
+                status: "PENDING"
+            }
         }
 
         this.showHideAuction = this.showHideAuction.bind(this)
@@ -41,6 +62,7 @@ class TicketDetails extends React.Component {
 
     componentDidMount(){
         this.checkWalletStatus()
+        console.log('params: ' + this.props.match.params.id);
     }
 
 

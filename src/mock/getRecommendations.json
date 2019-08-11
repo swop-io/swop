@@ -1,6 +1,6 @@
 [
     {
-        "swopRefNo" : "1",
+        "swopRefNo" : "SWP10000",
         "destination" : "Calgary",
         "departureDateTime" : "August 17, 2019 3:00 PM",
         "returnDateTime" : "August 20, 2019 5:00 PM",
@@ -8,7 +8,7 @@
         "amount" : 500
     },
     {
-        "swopRefNo" : "2",
+        "swopRefNo" : "SWP20000",
         "destination" : "Ottawa",
         "departureDateTime" : "August 17, 2019 3:00 PM",
         "returnDateTime" : "August 20, 2019 5:00 PM",
@@ -16,7 +16,7 @@
         "amount" : 500
     },
     {
-        "swopRefNo" : "3",
+        "swopRefNo" : "SWP30000",
         "destination" : "Montreal",
         "departureDateTime" : "August 17, 2019 3:00 PM",
         "returnDateTime" : "August 20, 2019 5:00 PM",
@@ -24,7 +24,7 @@
         "amount" : 500
     },
     {
-        "swopRefNo" : "4",
+        "swopRefNo" : "SWP40000",
         "destination" : "New York",
         "departureDateTime" : "August 17, 2019 3:00 PM",
         "returnDateTime" : "August 20, 2019 5:00 PM",
