@@ -2,9 +2,9 @@ import React from 'react'
 import 'bulma'
 import SwopLogo from '../../images/swop-logo.svg'
 import Recommendations from '../recommendations'
-import TicketDetails from '../details'
 import ExpiringTickets from '../../mock/getRecommendations.json'
-import BiddingTickets from '../../mock/getRecommendations.json'
+import * as firebase from "firebase";
+import config from '../../config/config.json'
 
 class Home extends React.Component {
 
@@ -12,15 +12,52 @@ class Home extends React.Component {
         super(props)
         this.state = {
             expiring : ExpiringTickets,
-            bidding : BiddingTickets
+            tickets : ExpiringTickets,
+            isLoading : false
         }
+
+        firebase.initializeApp(config.firebaseConfig);
+        this.database = firebase.database()
+    }
+
+    componentDidMount(){
+        this.loadAndListen()
+        this.setState({isLoading : true})
+    }
+
+    loadAndListen(){
+        let ticketsRef = this.database.ref('tickets').limitToLast(4)
+        let ticketsList = []
+
+        ticketsRef.once('value', snapshot => {
+            console.log(snapshot.val())
+         
+            snapshot.forEach(childSnapshot => {
+                let childKey = childSnapshot.key
+                let childData = childSnapshot.val()
+
+                childData['swopRefNo'] = childKey
+                ticketsList.push(childData)
+              
+            })
+    
+            this.setState({ tickets : ticketsList, isLoading : false })
+        });
+
     }
 
     render() {
         return (
             <div>
-                <Recommendations title = "Swop before they expire" list = { this.state.expiring }/>
-                <Recommendations title = "Active auctions" list = { this.state.bidding }/>
+                { this.state.isLoading ? 
+                
+                <p>Loading...</p> : 
+                // <p>DOne...</p>
+                
+                <Recommendations title = "Swop before they expire" list = { this.state.tickets }/> 
+                }
+                
+                <Recommendations title = "Active auctions" list = { this.state.tickets }/>
             </div>
         
         )

@@ -6,6 +6,7 @@ class Recommendations extends React.Component {
 
     constructor(props){
         super(props)
+        console.log(props.list)
         this.state = {
             list : props.list
         }

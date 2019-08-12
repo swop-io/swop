@@ -1,19 +1,7 @@
 import React from 'react'
 import 'bulma'
 import * as firebase from "firebase";
-
-const firebaseConfig = {
-    apiKey: "AIzaSyDMQgHzi4QmmxqbtcEmg1QyvZmUAa--SLg",
-    authDomain: "swop-mvp.firebaseapp.com",
-    databaseURL: "https://swop-mvp.firebaseio.com",
-    projectId: "swop-mvp",
-    storageBucket: "",
-    messagingSenderId: "78881211282",
-    appId: "1:78881211282:web:0d9cf76b5338e211"
-  };
-  
-  // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+import config from '../../config/config.json'
 
 class BidHistory extends React.Component {
 
@@ -24,6 +12,8 @@ class BidHistory extends React.Component {
             bids : null
         }
 
+        // Initialize Firebase
+        firebase.initializeApp(config.firebaseConfig);
         this.database = firebase.database()
 
     }

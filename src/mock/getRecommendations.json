@@ -1,34 +1,86 @@
 [
     {
-        "swopRefNo" : "SWP10000",
-        "destination" : "Calgary",
-        "departureDateTime" : "August 17, 2019 3:00 PM",
-        "returnDateTime" : "August 20, 2019 5:00 PM",
-        "airline" : "Air Canada",
-        "amount" : 500
+        "amount": 600,
+        "airline": "Air Canada",
+        "depart": {
+            "origin": "Toronto",
+            "originAirportCode": "YYZ",
+            "destination": "New York",
+            "destinationAirportCode": "JFK",
+            "departureDateTime": "August 17, 2019 3:00 PM",
+            "arrivalDateTime": "August 17, 2019 6:00 PM"
+        },
+        "return": {
+            "origin": "New York",
+            "originAirportCode": "JFK",
+            "destination": "Toronto",
+            "destinationAirportCode": "YYZ",
+            "departureDateTime": "August 20, 2019 12:00 PM",
+            "arrivalDateTime": "August 20, 2019 3:00 PM"
+        },
+        "swopRefNo": "SWP767ddee1"
     },
     {
-        "swopRefNo" : "SWP20000",
-        "destination" : "Ottawa",
-        "departureDateTime" : "August 17, 2019 3:00 PM",
-        "returnDateTime" : "August 20, 2019 5:00 PM",
-        "airline" : "Air Canada",
-        "amount" : 500
+        "amount": 600,
+        "airline": "Air Canada",
+        "depart": {
+            "origin": "Toronto",
+            "originAirportCode": "YYZ",
+            "destination": "New York",
+            "destinationAirportCode": "JFK",
+            "departureDateTime": "August 17, 2019 3:00 PM",
+            "arrivalDateTime": "August 17, 2019 6:00 PM"
+        },
+        "return": {
+            "origin": "New York",
+            "originAirportCode": "JFK",
+            "destination": "Toronto",
+            "destinationAirportCode": "YYZ",
+            "departureDateTime": "August 20, 2019 12:00 PM",
+            "arrivalDateTime": "August 20, 2019 3:00 PM"
+        },
+        "swopRefNo": "SWP767ddee1"
     },
     {
-        "swopRefNo" : "SWP30000",
-        "destination" : "Montreal",
-        "departureDateTime" : "August 17, 2019 3:00 PM",
-        "returnDateTime" : "August 20, 2019 5:00 PM",
-        "airline" : "Air Canada",
-        "amount" : 500
+        "amount": 600,
+        "airline": "Air Canada",
+        "depart": {
+            "origin": "Toronto",
+            "originAirportCode": "YYZ",
+            "destination": "New York",
+            "destinationAirportCode": "JFK",
+            "departureDateTime": "August 17, 2019 3:00 PM",
+            "arrivalDateTime": "August 17, 2019 6:00 PM"
+        },
+        "return": {
+            "origin": "New York",
+            "originAirportCode": "JFK",
+            "destination": "Toronto",
+            "destinationAirportCode": "YYZ",
+            "departureDateTime": "August 20, 2019 12:00 PM",
+            "arrivalDateTime": "August 20, 2019 3:00 PM"
+        },
+        "swopRefNo": "SWP767ddee1"
     },
     {
-        "swopRefNo" : "SWP40000",
-        "destination" : "New York",
-        "departureDateTime" : "August 17, 2019 3:00 PM",
-        "returnDateTime" : "August 20, 2019 5:00 PM",
-        "airline" : "Air Canada",
-        "amount" : 500
+        "amount": 600,
+        "airline": "Air Canada",
+        "depart": {
+            "origin": "Toronto",
+            "originAirportCode": "YYZ",
+            "destination": "New York",
+            "destinationAirportCode": "JFK",
+            "departureDateTime": "August 17, 2019 3:00 PM",
+            "arrivalDateTime": "August 17, 2019 6:00 PM"
+        },
+        "return": {
+            "origin": "New York",
+            "originAirportCode": "JFK",
+            "destination": "Toronto",
+            "destinationAirportCode": "YYZ",
+            "departureDateTime": "August 20, 2019 12:00 PM",
+            "arrivalDateTime": "August 20, 2019 3:00 PM"
+        },
+        "swopRefNo": "SWP767ddee1"
     }
 ]

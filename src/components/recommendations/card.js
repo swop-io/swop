@@ -10,7 +10,6 @@ class CardView extends React.Component {
         this.state = {
             data : props.data
         }
-
     }
 
     render() {
@@ -23,13 +22,13 @@ class CardView extends React.Component {
             </div>
             <div class="card-content">
             <p>
-                {this.state.data.destination}
+                {this.state.data.depart.destination}
             </p>
             <p class="is-size-7">
-                {this.state.data.departureDateTime}
+                {this.state.data.depart.departureDateTime}
             </p>
             <p class="is-size-7">
-                {this.state.data.returnDateTime}
+                {this.state.data.return.departureDateTime}
             </p>
             <p class="is-size-7">
                 {this.state.data.airline}
