@@ -10,10 +10,13 @@ class BidDetails extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            ethPrice : props.ethPrice,
             inputBidAmount : 0,
             currentNonce : 0,
-            currentTopBid : 0
+            maxAskAmount : 0,
+            currentTopBid : 0,
+            currentTopBidEth : 0,
+            lowestAskEth : 0,
+            isEnabled : false
 
         }
         this.placeBid = this.placeBid.bind(this)
@@ -34,13 +37,26 @@ class BidDetails extends React.Component {
             console.log(snapshot.val())
             let data = snapshot.val()
             this.setState({ currentNonce : data.currentNonce,
-                            currentTopBid : data.highestBidAmount})
+                            currentTopBid : Number(data.highestBidAmount),
+                            maxAskAmount : Number(data.maxAskAmount)})
+            this.convertAmountInEth()
         });
     }
 
+    convertAmountInEth(){
+        let converted = this.state.currentTopBid / this.props.ethPrice
+        this.setState({currentTopBidEth : converted})
+    }
 
     updateInputAmount(e){
-        this.setState({inputBidAmount : e.target.value})
+        let inputAmount = e.target.value
+
+        let enable = this.state.maxAskAmount > inputAmount && 
+                    inputAmount > this.state.currentTopBid ? 
+                    true : false
+
+        this.setState({inputBidAmount : inputAmount,
+                        isEnabled : enable })
     }
 
     async placeBid(){
@@ -100,19 +116,23 @@ class BidDetails extends React.Component {
                                         <div>
                                         <p class="heading">Highest Bid</p>
                                         <p class="title">${this.state.currentTopBid}</p>
-                                        <p>1.01 ETH</p>
+                                        <p>{this.state.currentTopBidEth.toFixed(4)} ETH</p>
                                         </div>
                                     
                                     </div>
                                     <div class="level-item">
                                         <div>
                                         
-                                       
+                                        <p class="is-size-7 has-text-info">Must be higher than top bid</p>
                                         <div class="control">
-                                        <input class="input is-small" style={{width : 100}} onChange={this.updateInputAmount} type="text" placeholder="Amount in USD"></input>
-                                       
+                                            <input class="input is-small" onChange={this.updateInputAmount} type="text" placeholder="Enter amount in USD"></input>
                                         </div>
-                                        <button class="button is-black is-small is-pulled-right" onClick={this.placeBid}>Place Bid</button>
+                                        
+                                        <button class="button is-black is-small is-pulled-right" 
+                                                disabled={!this.state.isEnabled} 
+                                                onClick={this.placeBid}
+                                                style={{marginTop : 8}}
+                                                >Place Bid</button>
                                         </div>
                                     </div>
                 </div>

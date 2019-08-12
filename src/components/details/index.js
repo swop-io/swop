@@ -66,7 +66,6 @@ class TicketDetails extends React.Component {
 
     convertAmountInEth(){
         let converted = this.state.data.amount / this.state.ethPrice
-        console.log(converted)
         this.setState({amountInEth : converted})
     }
 
