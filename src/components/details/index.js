@@ -4,36 +4,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Footer from '../footer'
 import FlightInfo from './flight'
 import BidHistory from './history'
+import BidDetails from './bidDetails'
 import AuctionSetup from './auction'
 import Constants from '../../utils/constants'
-import CryptoJS from 'crypto-js';
-import * as ethers from 'ethers';
 import APIService from '../../data/remote'
-
 
 class TicketDetails extends React.Component {
 
     constructor(props){
         super(props)
-        // this.data = {
-        //     flightDate : "Monday, August 19th, 2019",
-        //     origin : "Toronto",
-        //     originAirportCode: "YYZ",
-        //     destination : "New York",
-        //     destinationAirportCode: "JFK",
-        //     departureTime : "06:30",
-        //     arrivalTime : "10:30"
-
-        // }
 
         this.state = {
             showAuction : false,
             hasAccountSetup : false,
             wallet : undefined,
             hasWallet : false,
+            ethPrice : 211,
+            amountInEth : 0,
             data : {
                 airline : "temp",
-                amount : "temp",
+                amount : 500,
                 depart : {
                     arrivalDateTime: "August 17, 2019 6:00 PM",
                     departureDateTime: "August 17, 2019 3:00 PM",
@@ -56,16 +46,24 @@ class TicketDetails extends React.Component {
 
         this.showHideAuction = this.showHideAuction.bind(this)
         this.checkWalletStatus = this.checkWalletStatus.bind(this)
-        this.placeBid = this.placeBid.bind(this)
 
         this.apiService = new APIService()
+      
+        // setInterval(() => {
+        //     this.getEthPrice()
+        // }, 5000)
     }
 
     componentDidMount(){
         this.getTicketDetails()
         this.checkWalletStatus()
-       
-        console.log('params: ' + this.props.match.params.id);
+        this.convertAmountInEth()
+    }
+
+    convertAmountInEth(){
+        let converted = this.state.data.amount / this.state.ethPrice
+        console.log(converted)
+        this.setState({amountInEth : converted})
     }
 
     getTicketDetails(){
@@ -76,6 +74,22 @@ class TicketDetails extends React.Component {
             this.setState({data : res})
         })
       
+    }
+
+    getEthPrice(){
+        this.apiService.getEtherPrice().then(response => {
+            console.log(response)
+            if(response.ok) return response.json()
+        }).catch(err => {
+            console.log(err)
+        }).then(response => {
+            // if(response.status === "1" && response.message === "OK"){
+                console.log('loadLastPrice' , response)
+                // this.setState({ethPrice : JSON.stringify(response.result)})
+            // }else{
+            //     console.log(response.message)
+            // }
+        })
     }
 
     showHideAuction(){
@@ -97,46 +111,7 @@ class TicketDetails extends React.Component {
         }
     }
 
-    async placeBid(){
-        const encryptedPK = localStorage.getItem(Constants.LS_KEY_PK);
-        const hashKey = localStorage.getItem(Constants.LS_KEY_PASSWORD)
-        const bytes = CryptoJS.AES.decrypt(encryptedPK, hashKey);
-        const plainText = bytes.toString(CryptoJS.enc.Utf8);
 
-        let amountWei = ethers.utils.parseEther('1.0')
-        let hash = "0x3ea2f1d0abf3fc66cf29eebb70cbd4e7fe762ef8a09bcc06c8edf641230afec0";
-
-        let message = ethers.utils.concat([
-                        ethers.utils.hexZeroPad(ethers.utils.hexlify(amountWei), 32),
-                        ethers.utils.hexZeroPad(hash, 32),
-        ])
-
-        let messageHash = ethers.utils.keccak256(message)
-
-        let x = new ethers.Wallet(plainText)
-        let sig = await x.signMessage(ethers.utils.arrayify(messageHash));
-        let splitSig = ethers.utils.splitSignature(sig);
-    
-        console.log(`r: ${splitSig.r}`);
-        console.log(`s: ${splitSig.s}`);
-        console.log(`v: ${splitSig.v}`);
-
-        let param = {
-            swopRefNo : hash,
-            lowestAskAmount : 250,
-            maxAskAmount : 500,
-            bidAmount : 253,
-            user : "0xE5CDaa796A8AA9009FEBA23395f5FC083e462283",
-            signature : {
-                r : splitSig.r,
-                s : splitSig.s,
-                v : splitSig.v
-            }
-        }
-
-        let response = await this.apiService.placeBid(param)
-        console.log(response)
-    }
 
     render() {
         return (
@@ -151,36 +126,8 @@ class TicketDetails extends React.Component {
 
                         <p class="title is-5">Bids</p>
                         <div class="box">
-                        <div class="level">
-                                    <div class="level-item has-text-centered">
-                                        <div>
-                                        <p class="heading">Lowest Ask</p>
-                                        <p class="title">$300</p>
-                                        <p>1.01 ETH</p>
-                                        </div>
-                                    </div>
 
-                                    <div class="level-item has-text-centered">
-                                        <div>
-                                        <p class="heading">Highest Bid</p>
-                                        <p class="title">$350</p>
-                                        <p>1.01 ETH</p>
-                                        </div>
-                                    
-                                    </div>
-                                    <div class="level-item">
-                                        <div>
-                                        
-                                       
-                                        <div class="control">
-                                        <input class="input is-small" style={{width : 100}} type="text" placeholder="Amount in USD"></input>
-                                       
-                                        </div>
-                                        <button class="button is-black is-small is-pulled-right" onClick={this.placeBid}>Place Bid</button>
-                                        </div>
-                                    </div>
-                                </div>
-
+                        <BidDetails swopRefNo={this.props.match.params.id} ethPrice={this.state.ethPrice}/>
                         <BidHistory swopRefNo={this.props.match.params.id}/>
                         
                         </div>
@@ -191,7 +138,7 @@ class TicketDetails extends React.Component {
                         <div class="card">
                             <div class="card-content">
                                 <p class="title">${this.state.data.amount}</p>
-                                <p class="subtitle">2.00123 ETH</p>
+                                <p class="subtitle">{this.state.amountInEth.toFixed(4)} ETH</p>
 
                                 <a class="button is-fullwidth is-black">Purchase</a>
                                 <p>OR</p>

@@ -7,6 +7,9 @@ const ENDPOINT_SEARCH               = 'search'
 const ENDPOINT_PLACE_BID            = 'placeBid'
 const ENDPOINT_GET_TICKET_DETAILS   = "getTicketDetails"
 
+// Etherscan API
+const GET_ETHER_PRICE_PARAM         = "?module=stats&action=ethprice&apikey="
+
 export default class APIService {
 
     constructor(){
@@ -28,6 +31,10 @@ export default class APIService {
 
     placeBid(param){
         return this.postData(ENDPOINT_PLACE_BID, param)
+    }
+
+    getEtherPrice(){
+        return fetch(`${this.config.etherscan_url}${GET_ETHER_PRICE_PARAM}${this.config.etherscan_key}`)
     }
 
     postData(endpoint, param){

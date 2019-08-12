@@ -1,4 +1,6 @@
 {
     "url" : "http://68.183.204.206",
-    "port" : 3000
+    "port" : 3000,
+    "etherscan_url" : "https://api.etherscan.io/api",
+    "etherscan_key" : "84MIQPH3J2N3R35D7SVJ7RC4EBCZHZCMK3"
 }

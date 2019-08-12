@@ -52,7 +52,7 @@ class BidHistory extends React.Component {
                     </thead>
                     <tbody>
                         {
-                            data.map(row => {
+                            data.reverse().map(row => {
                                 return this.createRow(row)
                             })
                         }
