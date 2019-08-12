@@ -4,8 +4,6 @@ import Constants from '../../utils/constants'
 import CryptoJS from 'crypto-js';
 import * as ethers from 'ethers';
 import APIService from '../../data/remote'
-import * as firebase from "firebase";
-import config from '../../config/config.json'
 
 class BidDetails extends React.Component {
 
@@ -20,14 +18,13 @@ class BidDetails extends React.Component {
         }
         this.placeBid = this.placeBid.bind(this)
         this.updateInputAmount = this.updateInputAmount.bind(this)
-        this.apiService = new APIService()
         
-        // firebase.initializeApp(config.firebaseConfig);
-        // this.database = firebase.app().database()
+        this.apiService = new APIService()
+        this.database = props.database
     }
 
     componentDidMount(){
-
+        this.loadAndListen()
     }
 
     loadAndListen(){

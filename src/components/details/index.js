@@ -8,6 +8,8 @@ import BidDetails from './bidDetails'
 import AuctionSetup from './auction'
 import Constants from '../../utils/constants'
 import APIService from '../../data/remote'
+import * as firebase from "firebase";
+import config from '../../config/config.json'
 
 class TicketDetails extends React.Component {
 
@@ -48,6 +50,8 @@ class TicketDetails extends React.Component {
         this.checkWalletStatus = this.checkWalletStatus.bind(this)
 
         this.apiService = new APIService()
+        firebase.initializeApp(config.firebaseConfig);
+        this.database = firebase.app().database()
       
         // setInterval(() => {
         //     this.getEthPrice()
@@ -127,8 +131,8 @@ class TicketDetails extends React.Component {
                         <p class="title is-5">Bids</p>
                         <div class="box">
 
-                        <BidDetails swopRefNo={this.props.match.params.id} ethPrice={this.state.ethPrice}/>
-                        <BidHistory swopRefNo={this.props.match.params.id}/>
+                        <BidDetails swopRefNo={this.props.match.params.id} database={this.database} ethPrice={this.state.ethPrice}/>
+                        <BidHistory swopRefNo={this.props.match.params.id} database={this.database}/>
                         
                         </div>
                     </div>

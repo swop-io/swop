@@ -1,7 +1,5 @@
 import React from 'react'
 import 'bulma'
-import * as firebase from "firebase";
-import config from '../../config/config.json'
 
 class BidHistory extends React.Component {
 
@@ -11,10 +9,8 @@ class BidHistory extends React.Component {
         this.state = {
             bids : null
         }
-
-        // Initialize Firebase
-        firebase.initializeApp(config.firebaseConfig);
-        this.database = firebase.database()
+        
+        this.database = props.database
 
     }
 
