@@ -2,9 +2,10 @@ import DevConfig from '../../config/dev.json'
 import ProdConfig from '../../config/prod.json'
 import config from '../../config/config.json'
 
-const ENDPOINT_VERIFY_TICKET    = 'verifyTicket'
-const ENDPOINT_SEARCH           = 'search'
-const ENDPOINT_PLACE_BID        = 'placeBid'
+const ENDPOINT_VERIFY_TICKET        = 'verifyTicket'
+const ENDPOINT_SEARCH               = 'search'
+const ENDPOINT_PLACE_BID            = 'placeBid'
+const ENDPOINT_GET_TICKET_DETAILS   = "getTicketDetails"
 
 export default class APIService {
 
@@ -19,6 +20,10 @@ export default class APIService {
 
     verifyTicket(param){
         return this.postData(ENDPOINT_VERIFY_TICKET, param)
+    }
+
+    getTicketDetails(param){
+        return this.fetchData(ENDPOINT_GET_TICKET_DETAILS, param)
     }
 
     placeBid(param){

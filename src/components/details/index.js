@@ -10,20 +10,21 @@ import CryptoJS from 'crypto-js';
 import * as ethers from 'ethers';
 import APIService from '../../data/remote'
 
+
 class TicketDetails extends React.Component {
 
     constructor(props){
         super(props)
-        this.data = {
-            flightDate : "Monday, August 19th, 2019",
-            origin : "Toronto",
-            originAirportCode: "YYZ",
-            destination : "New York",
-            destinationAirportCode: "JFK",
-            departureTime : "06:30",
-            arrivalTime : "10:30"
+        // this.data = {
+        //     flightDate : "Monday, August 19th, 2019",
+        //     origin : "Toronto",
+        //     originAirportCode: "YYZ",
+        //     destination : "New York",
+        //     destinationAirportCode: "JFK",
+        //     departureTime : "06:30",
+        //     arrivalTime : "10:30"
 
-        }
+        // }
 
         this.state = {
             showAuction : false,
@@ -61,10 +62,21 @@ class TicketDetails extends React.Component {
     }
 
     componentDidMount(){
+        this.getTicketDetails()
         this.checkWalletStatus()
+       
         console.log('params: ' + this.props.match.params.id);
     }
 
+    getTicketDetails(){
+        this.apiService.getTicketDetails(`?swopRefNo=${this.props.match.params.id}`).then(res => {
+            return res.json()
+        }).then(res => {
+            console.log(res)
+            this.setState({data : res})
+        })
+      
+    }
 
     showHideAuction(){
         this.setState(state => ({
@@ -133,9 +145,9 @@ class TicketDetails extends React.Component {
                     <div class="column is-two-thirds">
                     <p class="title is-5">Flight Details</p>
 
-                        <FlightInfo title="Departing Flight" data={this.data}/>
+                        <FlightInfo title="Departing Flight" data={this.state.data.depart}/>
                         <br></br>
-                        <FlightInfo title="Return Flight" data={this.data}/>
+                        <FlightInfo title="Return Flight" data={this.state.data.return}/>
 
                         <p class="title is-5">Bids</p>
                         <div class="box">
@@ -169,7 +181,7 @@ class TicketDetails extends React.Component {
                                     </div>
                                 </div>
 
-                        <BidHistory/>
+                        <BidHistory swopRefNo={this.props.match.params.id}/>
                         
                         </div>
                     </div>
@@ -178,7 +190,7 @@ class TicketDetails extends React.Component {
                     <p class="title is-5">Payment</p>
                         <div class="card">
                             <div class="card-content">
-                                <p class="title">$500</p>
+                                <p class="title">${this.state.data.amount}</p>
                                 <p class="subtitle">2.00123 ETH</p>
 
                                 <a class="button is-fullwidth is-black">Purchase</a>
