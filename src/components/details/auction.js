@@ -82,7 +82,7 @@ class AuctionSetup extends React.Component {
                         <div>
                                 Account already setup
                                 <hr></hr>
-                                <Deposit/> 
+                                <Deposit swopRefNo={this.props.swopRefNo}/> 
                         </div>
                 }
                 

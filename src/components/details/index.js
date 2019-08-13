@@ -152,7 +152,7 @@ class TicketDetails extends React.Component {
                                 { this.state.showAuction ? 
                                     <div>
                                         <hr></hr>
-                                        <AuctionSetup hasAccountSetup={this.state.hasAccountSetup}/> 
+                                        <AuctionSetup hasAccountSetup={this.state.hasAccountSetup} swopRefNo={this.props.match.params.id}/> 
                                     </div>
                                     : "" 
                                     
