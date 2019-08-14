@@ -17,10 +17,8 @@ class Deposit extends React.Component {
     }
 
 
-    deposit(){
-        this.blockchain.deposit(this.props.swopRefNo, this.state.depositAmount).then(res => {
-            console.log(res)
-        })
+    async deposit(){
+        let txHash = await this.blockchain.deposit(this.props.swopRefNo, this.state.depositAmount)
     }
 
     updateInputAmount(e){

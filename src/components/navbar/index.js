@@ -4,10 +4,19 @@ import SwopLogo from '../../images/swop-logo.svg'
 import 'bulma'
 class NavBar extends React.Component {
 
+    constructor(props){
+        super(props)
+
+        this.state = {
+            showModal : false
+        }
+
+    }
+
     render() {
         return (
 
-            <nav class="navbar is-black is-spaced">
+            <nav class="navbar is-black is-spaced" style={{marginBottom : 40}}>
 
                 <div class="navbar-brand" style={{marginLeft : 110}}>
                     <a class="navbar-item" href="/">
@@ -20,13 +29,13 @@ class NavBar extends React.Component {
                     <span></span>
                     <span></span>
                     </div>
-                    <a class="navbar-item is-size-7" href="https://bulma.io/">
+                    <a class="navbar-item is-size-7" href="/">
                         How it works
                     </a>
-                    <a class="navbar-item is-size-7" href="https://bulma.io/">
+                    <a class="navbar-item is-size-7" href="/">
                         About
                     </a>
-                    <a class="navbar-item is-size-7" href="https://bulma.io/">
+                    <a class="navbar-item is-size-7" href="/">
                         Partner with Us
                     </a>
                 </div>
@@ -36,11 +45,11 @@ class NavBar extends React.Component {
                     <Link class="navbar-item is-size-7" to="/sell">
                         Sell Ticket
                     </Link>
-                    <a class="navbar-item is-size-7" href="https://bulma.io/">
+                    <a class="navbar-item is-size-7" href="/">
                         Listings
                     </a>
                     <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link is-size-7" href="https://bulma.io/documentation/overview/start/">
+                        <a class="navbar-link is-size-7" href="/">
                         Account
                         </a>
                         <div class="navbar-dropdown is-boxed ">

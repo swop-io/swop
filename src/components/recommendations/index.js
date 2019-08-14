@@ -14,8 +14,8 @@ class Recommendations extends React.Component {
      
     render() {
         return (
-            <div id="recommendations">
-                <h1 class="subtitle">
+            <div id="recommendations" style={{marginBottom : 30}}>
+                <h1 class="title has-text-weight-light">
                     {this.props.title}
                 </h1>
                 <ul>

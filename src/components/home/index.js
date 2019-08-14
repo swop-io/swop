@@ -54,7 +54,7 @@ class Home extends React.Component {
                 <p>Loading...</p> : 
                 // <p>DOne...</p>
                 
-                <Recommendations title = "Swop before they expire" list = { this.state.tickets }/> 
+                <Recommendations title = "Swop before they expire" list = { this.state.tickets }  /> 
                 }
                 
                 <Recommendations title = "Active auctions" list = { this.state.tickets }/>

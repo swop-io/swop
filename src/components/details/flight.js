@@ -14,7 +14,7 @@ class FlightInfo extends React.Component {
     render() {
         return (
             <div>
-                <p>{this.state.title}</p>
+                <p class="subtitle has-text-weight-light is-6">{this.state.title}</p>
                     <article class="message is-small is-dark">
                         <div class="message-header">
                             <p>{this.state.data.departureDateTime}</p>
