@@ -44,19 +44,19 @@ class SellTicket extends React.Component {
         this.postTicket = this.postTicket.bind(this)
         this.updateInputBooking = this.updateInputBooking.bind(this)
         this.updateLowestAskAmount = this.updateLowestAskAmount.bind(this)
+        this.updateMaxAskAmount = this.updateMaxAskAmount.bind(this)
 
         this.apiService = new APIService()
         this.blockchain = new BlockchainClient()
     }
 
     retrieveTicket(){
-        this.setState({isVerified : true})
-        // this.apiService.verifyTicket(this.state.bookingRefNo).then(res => {
-        //     console.log(res)
-        //     return res.json()
-        // }).then(res => {
-        //     this.setState({ ticket : res, isVerified : true })
-        // })
+        this.apiService.verifyTicket({ "bookingRefNo" : this.state.bookingRefNo}).then(res => {
+            return res.json()
+        }).then(res => {
+            console.log(res)
+            this.setState({ ticket : res.data, isVerified : true })
+        })
     }
 
     async postTicket(){
@@ -65,6 +65,12 @@ class SellTicket extends React.Component {
                                 this.state.ticket.amount, 
                                 this.state.lowestAskAmount)
         console.log(txHash)
+        
+        this.apiService.postTicket(this.state.ticket, this.state.lowestAskAmount).then(res => {
+            return res.json()
+        }).then(res => {
+            console.log(res)
+        })
     }
 
     updateInputBooking(e){
@@ -73,6 +79,13 @@ class SellTicket extends React.Component {
 
     updateLowestAskAmount(e){
         this.setState({ lowestAskAmount : e.target.value })
+    }
+
+    updateMaxAskAmount(e){
+        let inputAmount = e.target.value
+        let temp = this.state.ticket
+        temp['amount'] = inputAmount
+        this.setState({ ticket : temp })
     }
 
     displayForm(){
@@ -128,7 +141,7 @@ class SellTicket extends React.Component {
         
                             <div class="field">
                                 <p class="control has-icons-left">
-                                    <input class="input" onChange={this.updateLowestAskAmount} placeholder="Enter maximum asking amount"></input>
+                                    <input class="input" onChange={this.updateMaxAskAmount} placeholder="Enter maximum asking amount"></input>
                                     <span class="icon is-small is-left">
                                     <i class="fas fa-lock"></i>
                                     </span>

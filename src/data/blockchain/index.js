@@ -8,7 +8,7 @@ export default class BlockchainClient {
         window.ethereum.enable()
         this.provider = new ethers.providers.Web3Provider(window.web3.currentProvider)
         this.signer = this.provider.getSigner()
-        this.entryContract = new ethers.Contract("0xAa6c0B4767D232Ec45eAaF4F0549420787A26FF4", PublicEntryABI, this.signer)
+        this.entryContract = new ethers.Contract("0xCfEB869F69431e42cdB54A4F4f105C19C080A601", PublicEntryABI, this.signer)
     }
 
     async deposit(swopRefNo, amount){
