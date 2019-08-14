@@ -3,7 +3,9 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Home from "./components/home"
 import NavBar from "./components/navbar"
 import SellTicket from "./components/sell"
-import TicketDetails from "./components/details";
+import TicketDetails from "./components/details"
+import Listings from './components/listings'
+
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
               <Route exact path = "/" component = { Home } />
               <Route path = "/details/:id" component = { TicketDetails }/>
               <Route path = "/sell" component = { SellTicket } />
+              <Route path = "/listings" component = { Listings } />
           </div>
           <div class="column"></div>
         </div>

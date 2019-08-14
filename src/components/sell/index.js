@@ -119,13 +119,23 @@ class SellTicket extends React.Component {
             <div>
                 <p class="title is-5 has-text-weight-light">Flight Details</p>
                 <div class="card">
-                            <div class="card-content">
+                            <div class="card-content" style={{paddingBottom : 50}}>
 
                         <FlightInfo title="Departing Flight" data={this.state.ticket.depart}/>
                         <br></br>
                         <FlightInfo title="Return Flight" data={this.state.ticket.return}/>
                         <br></br>
         
+                            <div class="field">
+                                <p class="control has-icons-left">
+                                    <input class="input" onChange={this.updateLowestAskAmount} placeholder="Enter maximum asking amount"></input>
+                                    <span class="icon is-small is-left">
+                                    <i class="fas fa-lock"></i>
+                                    </span>
+                                </p>
+                           
+                            </div>
+
                             <div class="field">
                                 <p class="control has-icons-left">
                                     <input class="input" onChange={this.updateLowestAskAmount} placeholder="Enter minimum asking amount"></input>
@@ -136,7 +146,7 @@ class SellTicket extends React.Component {
                            
                             </div>
              
-                            <button type="button" class="button is-black "
+                            <button type="button" class="button is-black is-pulled-right" style={{width : 200}}
                                     onClick={this.postTicket}>
                                     Post
                                     </button>

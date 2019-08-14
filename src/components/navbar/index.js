@@ -45,7 +45,7 @@ class NavBar extends React.Component {
                     <Link class="navbar-item is-size-7" to="/sell">
                         Sell Ticket
                     </Link>
-                    <a class="navbar-item is-size-7" href="/">
+                    <a class="navbar-item is-size-7" href="/listings">
                         Listings
                     </a>
                     <div class="navbar-item has-dropdown is-hoverable">

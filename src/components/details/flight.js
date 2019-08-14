@@ -17,8 +17,8 @@ class FlightInfo extends React.Component {
                 <p class="subtitle has-text-weight-light is-6">{this.state.title}</p>
                     <article class="message is-small is-dark">
                         <div class="message-header">
-                            <p>{this.state.data.departureDateTime}</p>
-                            <span style={{float : 'right'}}>{this.state.data.origin} ({this.state.data.originAirportCode}) 
+                            <p class="has-text-weight-light">{this.state.data.departureDateTime}</p>
+                            <span class="has-text-weight-light" style={{float : 'right'}}>{this.state.data.origin} ({this.state.data.originAirportCode}) 
                                                 - {this.state.data.destination}({this.state.data.destinationAirportCode})</span>
                             </div>
                             <div class="message-body">
