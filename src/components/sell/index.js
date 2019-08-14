@@ -65,8 +65,8 @@ class SellTicket extends React.Component {
                                 this.state.ticket.amount, 
                                 this.state.lowestAskAmount)
         console.log(txHash)
-        
-        this.apiService.postTicket(this.state.ticket, this.state.lowestAskAmount).then(res => {
+        let address = window.web3.eth.accounts[0].toLowerCase()
+        this.apiService.postTicket(this.state.ticket, this.state.lowestAskAmount, address).then(res => {
             return res.json()
         }).then(res => {
             console.log(res)

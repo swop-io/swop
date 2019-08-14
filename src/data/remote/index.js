@@ -26,8 +26,9 @@ export default class APIService {
         return this.postData(ENDPOINT_VERIFY_TICKET, param)
     }
 
-    postTicket(param, lowestAskAmount){
+    postTicket(param, lowestAskAmount, address){
         param['lowestAskAmount'] = lowestAskAmount
+        param['user'] = address
         return this.postData(ENDPOINT_POST_TICKET, param)
     }
 

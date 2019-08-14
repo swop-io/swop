@@ -26,12 +26,12 @@ class Home extends React.Component {
     }
 
     loadAndListen(){
-        let ticketsRef = this.database.ref('tickets').limitToLast(4)
+        let ticketsRef = this.database.ref('tickets').orderByChild('createdAt')
         let ticketsList = []
 
         ticketsRef.once('value', snapshot => {
             console.log(snapshot.val())
-         
+        
             snapshot.forEach(childSnapshot => {
                 let childKey = childSnapshot.key
                 let childData = childSnapshot.val()
