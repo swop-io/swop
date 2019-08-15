@@ -15,6 +15,7 @@ class BidDetails extends React.Component {
             maxAskAmount : 0,
             currentTopBid : 0,
             currentTopBidEth : 0,
+            lowestAskAmount : 0,
             lowestAskEth : 0,
             isEnabled : false
 
@@ -38,7 +39,8 @@ class BidDetails extends React.Component {
             let data = snapshot.val()
             this.setState({ currentNonce : data.currentNonce,
                             currentTopBid : Number(data.highestBidAmount),
-                            maxAskAmount : Number(data.maxAskAmount)})
+                            maxAskAmount : Number(data.maxAskAmount),
+                            lowestAskAmount : Number(data.lowestAskAmount)})
             this.convertAmountInEth()
         });
     }
@@ -85,8 +87,6 @@ class BidDetails extends React.Component {
 
         let param = {
             swopRefNo : this.props.swopRefNo,
-            lowestAskAmount : 250,
-            maxAskAmount : 500,
             bidAmount : this.state.inputBidAmount,
             user : wallet.address,
             signature : {
@@ -107,7 +107,7 @@ class BidDetails extends React.Component {
                                     <div class="level-item has-text-centered">
                                         <div>
                                         <p class="heading">Lowest Ask</p>
-                                        <p class="title">$300</p>
+                                        <p class="title">${this.state.lowestAskAmount}</p>
                                         <p>1.01 ETH</p>
                                         </div>
                                     </div>

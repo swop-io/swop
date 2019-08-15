@@ -1,16 +1,51 @@
 import React from 'react'
 import 'bulma'
+import BlockchainClient from '../../data/blockchain'
 
 class ListingItem extends React.Component {
 
     constructor(props){
         super(props)
+
+        this.state = {
+            auctionDetails : null,
+            isLoading : false,
+            flightDetails : props.flightDetails
+        }
+        this.displayDetails = this.displayDetails.bind(this)
+        this.closeAuction = this.closeAuction.bind(this)
+        this.blockchain = new BlockchainClient()
+
+        // console.log(this.state.flightDetails)
     }
 
-    render() {
+    componentDidMount(){
+        this.setState({ isLoading : true})
+        this.loadAndListen()
+    }
+
+    loadAndListen(){
+        let auctionRef = this.props.database.ref(`auctions/${this.state.flightDetails.swopRefNo}`)
+        auctionRef.on('value', snapshot => {
+            this.setState({auctionDetails : snapshot.val()})
+            this.setState({isLoading : false})
+            console.log(this.state.auctionDetails)
+        })
+    }
+
+    async closeAuction(){
+        let txHash = await this.blockchain.closeAuction(
+                                this.state.flightDetails.swopRefNo,
+                                this.state.auctionDetails.topBidAmount,
+                                this.state.auctionDetails.currentNonce,
+                                this.state.auctionDetails.currentSignature)
+
+        console.log(txHash)
+    }
+
+    displayDetails(){
         return (
-            <div>
-                <div class="box" style={{marginBottom : 10}}>
+            <div class="box" style={{marginBottom : 10}}>
                 <div class="columns">
                     <div class="column">
                     <article class="media">
@@ -22,9 +57,9 @@ class ListingItem extends React.Component {
                     <div class="media-content">
                     <div class="content">
                         <p>
-                        <strong>to New York</strong> 
+                        <strong>To {this.state.flightDetails.depart.destination}</strong> 
                         <br></br>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
+                        {this.state.flightDetails.depart.departureDateTime}
                         </p>
                     </div>
 
@@ -37,7 +72,8 @@ class ListingItem extends React.Component {
                                     <div class="level-item has-text-centered">
                                         <div>
                                         <p class="heading">Lowest Ask</p>
-                                        <p class="title">$300</p>
+                                        { this.state.auctionDetails !== null ? 
+                                            <p class="title">${this.state.auctionDetails.lowestAskAmount}</p> : ""}
                                         <p>1.01 ETH</p>
                                         </div>
                                     </div>
@@ -45,9 +81,10 @@ class ListingItem extends React.Component {
                                     <div class="level-item has-text-centered">
                                         <div>
                                         <p class="heading">Highest Bid</p>
-                                        {/* <p class="title">${this.state.currentTopBid}</p> */}
+                                        { this.state.auctionDetails !== null ? 
+                                            <p class="title">${this.state.auctionDetails.highestBidAmount}</p> : ""}
                                         {/* <p>{this.state.currentTopBidEth.toFixed(4)} ETH</p> */}
-                                         <p class="title">$300</p>
+                        
                                         <p>2.333 ETH</p>
                                         </div>
                                     
@@ -58,18 +95,21 @@ class ListingItem extends React.Component {
                     </div>
                     <div class="column is-one-quarter">
                     <button class="button is-black is-fullwidth" 
-                            onClick={this.placeBid}>Close Auction</button>
+                            onClick={this.closeAuction}>Close Auction</button>
                                       
                     <button class="button is-fullwidth" 
                             onClick={this.placeBid}
                             style={{marginTop : 8}}>Cancel</button>
                     </div>
                 </div>
+        </div>
+        )
+    }
 
-
-
-
-                </div>
+    render() {
+        return (
+            <div>
+                { !this.state.isLoading ? this.displayDetails() : ""}
             </div>
         )
     }

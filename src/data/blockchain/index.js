@@ -19,6 +19,25 @@ export default class BlockchainClient {
         return txHash.hash
     }
 
+    async closeAuction(swopRefNo, topBidAmount, nonce, signature){
+        let gasLimit = ethers.utils.bigNumberify(3000000)
+        let topBidAmountWei = 123456 // TODO convert to USD to wei
+
+        let tx = await this.entryContract.close(
+                    ethers.utils.formatBytes32String(swopRefNo),
+                    topBidAmountWei,
+                    ethers.utils.formatBytes32String(`${nonce}:nonce`),
+                    signature.r,
+                    signature.s,
+                    signature.v,
+                    { gasLimit : gasLimit}
+        )
+
+        console.log(tx.hash)
+        return tx.hash
+    }
+
+
     async postTicket(swopRefNo, amount, lowestAskAmount){
         let gasLimit = ethers.utils.bigNumberify(3000000)
 
