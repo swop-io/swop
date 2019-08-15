@@ -1,0 +1,229 @@
+[
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_container",
+          "type": "address"
+        }
+      ],
+      "name": "setContainerEntry",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "container",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "_commonDB",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "refNo",
+          "type": "bytes32"
+        },
+        {
+          "name": "depositAmount",
+          "type": "uint256"
+        },
+        {
+          "name": "bidder",
+          "type": "address"
+        }
+      ],
+      "name": "addDeposit",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "refNo",
+          "type": "bytes32"
+        },
+        {
+          "name": "bidder",
+          "type": "address"
+        }
+      ],
+      "name": "removeDeposit",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "refNo",
+          "type": "bytes32"
+        },
+        {
+          "name": "bidder",
+          "type": "address"
+        }
+      ],
+      "name": "setTopBidder",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "refNo",
+          "type": "bytes32"
+        },
+        {
+          "name": "state",
+          "type": "uint8"
+        }
+      ],
+      "name": "updateAuctionState",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "refNo",
+          "type": "bytes32"
+        },
+        {
+          "name": "bidder",
+          "type": "address"
+        }
+      ],
+      "name": "isBidder",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "refNo",
+          "type": "bytes32"
+        },
+        {
+          "name": "bidder",
+          "type": "address"
+        }
+      ],
+      "name": "getDepositedAmount",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "refNo",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getAuctionState",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "refNo",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getTopBidder",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]

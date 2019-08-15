@@ -1,5 +1,6 @@
 import { ethers } from 'ethers'
 import PublicEntryABI from './abi/PublicEntry.json'
+import AuctionsDB_ABI from './abi/AuctionsDB.json'
 
 
 export default class BlockchainClient {
@@ -9,6 +10,9 @@ export default class BlockchainClient {
         this.provider = new ethers.providers.Web3Provider(window.web3.currentProvider)
         this.signer = this.provider.getSigner()
         this.entryContract = new ethers.Contract("0xCfEB869F69431e42cdB54A4F4f105C19C080A601", PublicEntryABI, this.signer)
+        this.auctionsDB = new ethers.Contract('0x9561C133DD8580860B6b7E504bC5Aa500f0f06a7', AuctionsDB_ABI, this.signer)
+
+        this.currentAddress = window.web3.eth.accounts[0].toLowerCase()
     }
 
     async deposit(swopRefNo, amount){
@@ -57,5 +61,8 @@ export default class BlockchainClient {
         return txHash.hash
     }
 
+    async isBidder(swopRefNo){
+        return await this.auctionsDB.isBidder(ethers.utils.formatBytes32String(swopRefNo), this.currentAddress)
+    }
 
 }

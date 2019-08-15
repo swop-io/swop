@@ -4,27 +4,37 @@ import Constants from '../../utils/constants'
 import CryptoJS from 'crypto-js';
 import * as ethers from 'ethers';
 import APIService from '../../data/remote'
+import Blockchain from '../../data/blockchain'
 
 class BidDetails extends React.Component {
 
     constructor(props){
         super(props)
         this.state = {
-            inputBidAmount : 0,
+            inputBidAmount : '',
             currentNonce : 0,
             maxAskAmount : 0,
             currentTopBid : 0,
             currentTopBidEth : 0,
             lowestAskAmount : 0,
             lowestAskEth : 0,
-            isEnabled : false
+            isEnabled : false,
+            isBidder : false
 
         }
         this.placeBid = this.placeBid.bind(this)
         this.updateInputAmount = this.updateInputAmount.bind(this)
         
         this.apiService = new APIService()
+        this.blockchain = new Blockchain()
         this.database = props.database
+    }
+
+    componentWillMount(){
+        this.blockchain.isBidder(this.props.swopRefNo).then(res => {
+            console.log('isBidder: ' + res)
+            this.setState({isBidder : res})
+        })
     }
 
     componentDidMount(){
@@ -46,20 +56,24 @@ class BidDetails extends React.Component {
     }
 
     convertAmountInEth(){
-        let converted = this.state.currentTopBid / this.props.ethPrice
-        this.setState({currentTopBidEth : converted})
+        let convertedTopBid = this.state.currentTopBid / this.props.ethPrice
+        let convertedLowestAsk = this.state.lowestAskAmount / this.props.ethPrice
+        this.setState({currentTopBidEth : convertedTopBid, lowestAskEth : convertedLowestAsk})
     }
 
     updateInputAmount(e){
         let inputAmount = e.target.value
 
         let enable = this.state.maxAskAmount > inputAmount && 
-                    inputAmount > this.state.currentTopBid ? 
+                    inputAmount > this.state.lowestAskAmount &&
+                    inputAmount > this.state.currentTopBid &&
+                    this.state.isBidder ? 
                     true : false
 
         this.setState({inputBidAmount : inputAmount,
                         isEnabled : enable })
     }
+
 
     async placeBid(){
         const encryptedPK = localStorage.getItem(Constants.LS_KEY_PK);
@@ -97,6 +111,7 @@ class BidDetails extends React.Component {
         }
 
         let response = await this.apiService.placeBid(param)
+        this.setState({inputBidAmount : ''})
         console.log(response)
     }
 
@@ -108,7 +123,7 @@ class BidDetails extends React.Component {
                                         <div>
                                         <p class="heading">Lowest Ask</p>
                                         <p class="title">${this.state.lowestAskAmount}</p>
-                                        <p>1.01 ETH</p>
+                                        <p>{this.state.lowestAskEth.toFixed(4)} ETH</p>
                                         </div>
                                     </div>
 
@@ -122,10 +137,18 @@ class BidDetails extends React.Component {
                                     </div>
                                     <div class="level-item">
                                         <div>
+                                        {
+                                            this.state.isBidder ? 
+                                                <p class="is-size-7 has-text-info">Must be higher than top bid</p> :
+                                                <p class="is-size-7 has-text-danger">Make a deposit to join auction</p>
+                                        }
                                         
-                                        <p class="is-size-7 has-text-info">Must be higher than top bid</p>
+                                        
                                         <div class="control">
-                                            <input class="input is-small" onChange={this.updateInputAmount} type="text" placeholder="Enter amount in USD"></input>
+                                            <input class="input is-small" value={this.state.inputBidAmount} 
+                                                    onChange={this.updateInputAmount} type="text" 
+                                                    disabled={!this.state.isBidder}
+                                                    placeholder="Enter amount in USD"></input>
                                         </div>
                                         
                                         <button class="button is-black is-small is-pulled-right" 
