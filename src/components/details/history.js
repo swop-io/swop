@@ -19,7 +19,10 @@ class BidHistory extends React.Component {
     loadAndListen(){
         let bidRef = this.database.ref(`bids/${this.props.swopRefNo}`)
         bidRef.on('value', snapshot => {
-            this.setState({bids : snapshot.val().reverse()})
+            if(snapshot.val() !== null){
+                this.setState({bids : snapshot.val().reverse()})
+            }
+           
         });
     }
 

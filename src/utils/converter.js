@@ -13,4 +13,9 @@ export default class EthConverter {
     usdToEth(amount){
         return amount / this.ethPrice
     }
+
+    weiToUSD(wei){
+        let eth = wei / 1000000000000000000 
+        return eth * this.ethPrice
+    }
 }

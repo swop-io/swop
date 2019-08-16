@@ -1,6 +1,7 @@
 import React from 'react'
 import 'bulma'
 import BlockchainClient from '../../data/blockchain'
+import EthConverter from '../../utils/converter'
 
 class Deposit extends React.Component {
 
@@ -8,17 +9,29 @@ class Deposit extends React.Component {
         super(props)
 
         this.state = {
-            depositAmount : 0
+            depositAmount : '',
+            totalDepositsInWei : 0
         }
 
         this.updateInputAmount = this.updateInputAmount.bind(this)
         this.deposit = this.deposit.bind(this)
         this.blockchain = new BlockchainClient()
+        this.ethConverter = new EthConverter()
     }
 
+    componentWillMount(){
+        this.getDepositedAmount()
+    }
+
+    async getDepositedAmount(){
+        let totalDepositsInWei = await this.blockchain.getDepositedAmount(this.props.swopRefNo)
+        this.setState({ totalDepositsInWei : totalDepositsInWei })
+    }
 
     async deposit(){
         let txHash = await this.blockchain.deposit(this.props.swopRefNo, this.state.depositAmount)
+        this.setState({depositAmount : ''})
+        this.getDepositedAmount()
     }
 
     updateInputAmount(e){
@@ -28,10 +41,16 @@ class Deposit extends React.Component {
     render() {
         return (
             <div>
+                <div>
+                    <p>Total Deposits: {this.ethConverter.weiToUSD(this.state.totalDepositsInWei)}</p>
+                </div>
                 <form>
                 <div class="field">
                     <p class="control has-icons-left">
-                        <input class="input" onChange={this.updateInputAmount} placeholder="Enter amount to deposit"></input>
+                        <input class="input" 
+                                    value={this.state.depositAmount}
+                                    onChange={this.updateInputAmount} 
+                                    placeholder="Enter amount to deposit"></input>
                         <span class="icon is-small is-left">
                         <i class="fas fa-lock"></i>
                         </span>

@@ -66,4 +66,8 @@ export default class BlockchainClient {
         return await this.auctionsDB.isBidder(ethers.utils.formatBytes32String(swopRefNo), this.currentAddress)
     }
 
+    async getDepositedAmount(swopRefNo){
+        return await this.auctionsDB.getDepositedAmount(ethers.utils.formatBytes32String(swopRefNo), this.currentAddress)
+    }
+
 }
