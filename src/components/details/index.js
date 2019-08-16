@@ -10,6 +10,7 @@ import Constants from '../../utils/constants'
 import APIService from '../../data/remote'
 import * as firebase from "firebase";
 import config from '../../config/config.json'
+import EthConverter from '../../utils/converter'
 
 class TicketDetails extends React.Component {
 
@@ -50,12 +51,10 @@ class TicketDetails extends React.Component {
         this.checkWalletStatus = this.checkWalletStatus.bind(this)
 
         this.apiService = new APIService()
+        this.ethConverter = new EthConverter()
         firebase.initializeApp(config.firebaseConfig);
         this.database = firebase.app().database()
       
-        // setInterval(() => {
-        //     this.getEthPrice()
-        // }, 5000)
     }
 
     componentDidMount(){
@@ -65,8 +64,7 @@ class TicketDetails extends React.Component {
     }
 
     convertAmountInEth(){
-        let converted = this.state.data.amount / this.state.ethPrice
-        this.setState({amountInEth : converted})
+        this.setState({amountInEth : this.ethConverter.usdToEth(this.state.data.amount)})
     }
 
     getTicketDetails(){

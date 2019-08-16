@@ -5,6 +5,7 @@ import CryptoJS from 'crypto-js';
 import * as ethers from 'ethers';
 import APIService from '../../data/remote'
 import Blockchain from '../../data/blockchain'
+import EthConverter from '../../utils/converter'
 
 class BidDetails extends React.Component {
 
@@ -27,12 +28,12 @@ class BidDetails extends React.Component {
         
         this.apiService = new APIService()
         this.blockchain = new Blockchain()
+        this.ethConverter = new EthConverter()
         this.database = props.database
     }
 
     componentWillMount(){
         this.blockchain.isBidder(this.props.swopRefNo).then(res => {
-            console.log('isBidder: ' + res)
             this.setState({isBidder : res})
         })
     }
@@ -56,9 +57,8 @@ class BidDetails extends React.Component {
     }
 
     convertAmountInEth(){
-        let convertedTopBid = this.state.currentTopBid / this.props.ethPrice
-        let convertedLowestAsk = this.state.lowestAskAmount / this.props.ethPrice
-        this.setState({currentTopBidEth : convertedTopBid, lowestAskEth : convertedLowestAsk})
+        this.setState( {currentTopBidEth : this.ethConverter.usdToEth(this.state.currentTopBid), 
+                        lowestAskEth : this.ethConverter.usdToEth(this.state.lowestAskAmount)} )
     }
 
     updateInputAmount(e){

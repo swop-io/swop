@@ -1,7 +1,7 @@
 import { ethers } from 'ethers'
 import PublicEntryABI from './abi/PublicEntry.json'
 import AuctionsDB_ABI from './abi/AuctionsDB.json'
-
+import EthConverter from '../../utils/converter'
 
 export default class BlockchainClient {
 
@@ -13,23 +13,23 @@ export default class BlockchainClient {
         this.auctionsDB = new ethers.Contract('0x9561C133DD8580860B6b7E504bC5Aa500f0f06a7', AuctionsDB_ABI, this.signer)
 
         this.currentAddress = window.web3.eth.accounts[0].toLowerCase()
+        this.ethConverter = new EthConverter()
     }
 
     async deposit(swopRefNo, amount){
         let txHash = await this.entryContract.deposit(
                                 ethers.utils.formatBytes32String(swopRefNo), 
-                                { value : 1231231 })
+                                { value : this.ethConverter.usdToEthInWei(amount) })
         console.log(txHash.hash)
         return txHash.hash
     }
 
     async closeAuction(swopRefNo, topBidAmount, nonce, signature){
         let gasLimit = ethers.utils.bigNumberify(3000000)
-        let topBidAmountWei = 123456 // TODO convert to USD to wei
 
         let tx = await this.entryContract.close(
                     ethers.utils.formatBytes32String(swopRefNo),
-                    topBidAmountWei,
+                    this.ethConverter.usdToEthInWei(topBidAmount),
                     ethers.utils.formatBytes32String(`${nonce}:nonce`),
                     signature.r,
                     signature.s,
@@ -47,16 +47,17 @@ export default class BlockchainClient {
 
         let txHash = await this.entryContract.postTicket(
                                     ethers.utils.formatBytes32String(swopRefNo), 
-                                    amount, 
-                                    lowestAskAmount,
+                                    this.ethConverter.usdToEthInWei(amount), 
+                                    this.ethConverter.usdToEthInWei(lowestAskAmount),
                                     false, { gasLimit : gasLimit})
         console.log(txHash.hash)
         return txHash.hash
     }
 
     async buyTicket(swopRefNo, amount){
-        let wei = 0.00000001
-        let txHash = await this.entryContract.buyTicket(ethers.utils.formatBytes32String(swopRefNo), {value : wei})
+        let txHash = await this.entryContract.buyTicket(
+                                    ethers.utils.formatBytes32String(swopRefNo), 
+                                    { value : this.ethConverter.usdToEthInWei(amount) })
         console.log(txHash.hash)
         return txHash.hash
     }

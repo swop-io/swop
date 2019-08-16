@@ -1,6 +1,7 @@
 import React from 'react'
 import 'bulma'
 import BlockchainClient from '../../data/blockchain'
+import EthConverter from '../../utils/converter'
 
 class ListingItem extends React.Component {
 
@@ -15,8 +16,8 @@ class ListingItem extends React.Component {
         this.displayDetails = this.displayDetails.bind(this)
         this.closeAuction = this.closeAuction.bind(this)
         this.blockchain = new BlockchainClient()
+        this.ethConverter = new EthConverter()
 
-        // console.log(this.state.flightDetails)
     }
 
     componentDidMount(){
@@ -29,7 +30,6 @@ class ListingItem extends React.Component {
         auctionRef.on('value', snapshot => {
             this.setState({auctionDetails : snapshot.val()})
             this.setState({isLoading : false})
-            console.log(this.state.auctionDetails)
         })
     }
 
@@ -73,8 +73,12 @@ class ListingItem extends React.Component {
                                         <div>
                                         <p class="heading">Lowest Ask</p>
                                         { this.state.auctionDetails !== null ? 
-                                            <p class="title">${this.state.auctionDetails.lowestAskAmount}</p> : ""}
-                                        <p>1.01 ETH</p>
+                                            <div>
+                                                 <p class="title">${this.state.auctionDetails.lowestAskAmount}</p>
+                                                 <p>{this.ethConverter.usdToEth(this.state.auctionDetails.lowestAskAmount)} ETH</p>
+                                            </div>
+                                            : ""}
+                                       
                                         </div>
                                     </div>
 
@@ -82,10 +86,11 @@ class ListingItem extends React.Component {
                                         <div>
                                         <p class="heading">Highest Bid</p>
                                         { this.state.auctionDetails !== null ? 
-                                            <p class="title">${this.state.auctionDetails.highestBidAmount}</p> : ""}
-                                        {/* <p>{this.state.currentTopBidEth.toFixed(4)} ETH</p> */}
-                        
-                                        <p>2.333 ETH</p>
+                                            <div>
+                                                <p class="title">${this.state.auctionDetails.highestBidAmount}</p>
+                                                <p>{this.ethConverter.usdToEth(this.state.auctionDetails.highestBidAmount)}</p>
+                                            </div>
+                                             : ""}
                                         </div>
                                     
                                     </div>

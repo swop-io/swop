@@ -22,15 +22,7 @@ class Deposit extends React.Component {
     }
 
     updateInputAmount(e){
-        let inputAmount = e.target.value
-
-        // let enable = this.state.maxAskAmount > inputAmount && 
-        //             inputAmount > this.state.currentTopBid ? 
-        //             true : false
-
-        // this.setState({inputBidAmount : inputAmount,
-        //                 isEnabled : enable })
-        this.setState({depositAmount : inputAmount})
+        this.setState({depositAmount : e.target.value})
     }
 
     render() {
