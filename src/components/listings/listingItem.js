@@ -2,6 +2,8 @@ import React from 'react'
 import 'bulma'
 import BlockchainClient from '../../data/blockchain'
 import EthConverter from '../../utils/converter'
+import AirCanada from '../../images/air_canada.png'
+import Delta from '../../images/delta.jpg'
 
 class ListingItem extends React.Component {
 
@@ -11,15 +13,18 @@ class ListingItem extends React.Component {
         this.state = {
             auctionDetails : null,
             isLoading : false,
-            flightDetails : props.flightDetails
+            flightDetails : props.flightDetails,
+            winningBidder : ''
         }
         this.displayDetails = this.displayDetails.bind(this)
         this.closeAuction = this.closeAuction.bind(this)
         this.blockchain = new BlockchainClient()
         this.ethConverter = new EthConverter()
-
     }
 
+    componentWillMount(){
+        this.loadWinningBidder()
+    }
     componentDidMount(){
         this.setState({ isLoading : true})
         this.loadAndListen()
@@ -36,11 +41,17 @@ class ListingItem extends React.Component {
     async closeAuction(){
         let txHash = await this.blockchain.closeAuction(
                                 this.state.flightDetails.swopRefNo,
-                                this.state.auctionDetails.topBidAmount,
+                                this.state.auctionDetails.highestBidAmount,
                                 this.state.auctionDetails.currentNonce,
                                 this.state.auctionDetails.currentSignature)
 
         console.log(txHash)
+       this.loadWinningBidder()
+    }
+
+    async loadWinningBidder(){
+        let winningBidder = await this.blockchain.getTopBidder(this.state.flightDetails.swopRefNo)
+        this.setState({ winningBidder : winningBidder })
     }
 
     displayDetails(){
@@ -51,15 +62,17 @@ class ListingItem extends React.Component {
                     <article class="media">
                     <div class="media-left">
                     <figure class="image is-64x64">
-                        <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image"></img>
+                        <img src={AirCanada} alt="Image"></img>
                     </figure>
                     </div>
                     <div class="media-content">
                     <div class="content">
-                        <p>
-                        <strong>To {this.state.flightDetails.depart.destination}</strong> 
+                        <p class="has-text-weight-light">
+                        <strong>to {this.state.flightDetails.depart.destination}</strong> 
                         <br></br>
                         {this.state.flightDetails.depart.departureDateTime}
+                        <br></br>
+                        {this.state.flightDetails.return.departureDateTime}
                         </p>
                     </div>
 
@@ -88,7 +101,7 @@ class ListingItem extends React.Component {
                                         { this.state.auctionDetails !== null ? 
                                             <div>
                                                 <p class="title">${this.state.auctionDetails.highestBidAmount}</p>
-                                                <p>{this.ethConverter.usdToEth(this.state.auctionDetails.highestBidAmount)}</p>
+                                                <p>{this.ethConverter.usdToEth(this.state.auctionDetails.highestBidAmount)} ETH</p>
                                             </div>
                                              : ""}
                                         </div>
@@ -105,6 +118,11 @@ class ListingItem extends React.Component {
                     <button class="button is-fullwidth" 
                             onClick={this.placeBid}
                             style={{marginTop : 8}}>Cancel</button>
+
+                    {/* { this.state.winningBidder !== '' ? 
+                     <p>Winning Bidder: {this.state.winningBidder}</p> : ""
+                    } */}
+                   
                     </div>
                 </div>
         </div>

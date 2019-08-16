@@ -40,8 +40,6 @@ class Listings extends React.Component {
             this.setState({ swopRefNos : keys})
             this.getTicketDetails()
         });
-
-        
     }
 
     getTicketDetails(){
@@ -56,8 +54,6 @@ class Listings extends React.Component {
                     ticketDetails.push(details)
                     this.setState({ticketDetails : ticketDetails})
                 }
-                
-
             })
         })
         this.setState({isLoading : false})
@@ -87,7 +83,7 @@ class Listings extends React.Component {
     render() {
         return (
             <div>
-                <p class="title is-5 has-text-weight-light">Your Listings</p>
+                <p class="title has-text-weight-light">Your Listings</p>
                 <div class="tabs is-medium">
                 <ul>
                     <li class="is-active is-5 has-text-weight-light"><a>Active</a></li>

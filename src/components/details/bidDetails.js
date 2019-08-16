@@ -81,12 +81,14 @@ class BidDetails extends React.Component {
         const bytes = CryptoJS.AES.decrypt(encryptedPK, hashKey);
         const plainText = bytes.toString(CryptoJS.enc.Utf8);
 
-        let amountWei = ethers.utils.parseEther('1.0')
         let hexSwopRefNo = ethers.utils.formatBytes32String(this.props.swopRefNo);
-
+        let bytesNonce = ethers.utils.formatBytes32String(this.state.currentNonce + ':nonce');
+        let amountInWei = ethers.utils.parseEther('' + this.ethConverter.usdToEth(this.state.inputBidAmount))
+        
         let message = ethers.utils.concat([
-                        ethers.utils.hexZeroPad(ethers.utils.hexlify(amountWei), 32),
-                        ethers.utils.hexZeroPad(hexSwopRefNo, 32),
+            ethers.utils.hexZeroPad(hexSwopRefNo, 32),
+            ethers.utils.hexZeroPad(ethers.utils.hexlify(amountInWei), 32),
+            ethers.utils.hexZeroPad(bytesNonce, 32)
         ])
 
         let messageHash = ethers.utils.keccak256(message)

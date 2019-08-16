@@ -28,19 +28,20 @@ class CardView extends React.Component {
                     {/* <FontAwesomeIcon icon={faCoffee} /> */}
                         to {this.state.data.depart.destination}
                     </p>
-                    <p class="is-size-6">
+                    <p class="is-size-4 has-text-weight-light">
                         ${this.state.data.amount} 
                     </p>
-                    <p class="is-size-6">
+                    <p class="is-size-6 has-text-weight-light">
                         {this.ethConverter.usdToEth(this.state.data.amount)} ETH
                     </p>
-                    <p class="is-size-6">
+                    <br></br>
+                    <p class="is-size-6 has-text-weight-light">
                         {this.state.data.depart.departureDateTime}
                     </p>
-                    <p class="is-size-6">
+                    <p class="is-size-6 has-text-weight-light">
                         {this.state.data.return.departureDateTime}
                     </p>
-                    <p class="is-size-6">
+                    <p class="is-size-6 has-text-weight-light">
                         {this.state.data.airline}
                     </p>
                 </div>
