@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="156px" height="155px" viewBox="0 0 156 155" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>Logo</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="A" transform="translate(-80.000000, -35.000000)" fill="#FFFFFF">
+            <path d="M80,93 L80,80 C80,55.1471863 100.147186,35 125,35 L191,35 C215.852814,35 236,55.1471863 236,80 L236,89 C224,77.6666667 210.333333,72 195,72 C179.666667,72 162.333333,72 143,72 L143,59 L105,83 L143,108 L143,95 L195,95 C216.333333,99 230,111.666667 236,133 L236,145 C236,169.852814 215.852814,190 191,190 L125,190 C100.147186,190 80,169.852814 80,145 L80,137 C92.6666667,148.333333 106.666667,154 122,154 C137.333333,154 154.666667,154 174,154 L174,167 L212,143 L174,118 L174,131 L122,131 C100,127 86,114.333333 80,93 Z" id="Logo"></path>
+        </g>
+    </g>
+</svg>

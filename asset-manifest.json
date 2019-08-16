@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/swop-ui/static/css/main.314a2348.chunk.css",
+    "main.js": "/swop-ui/static/js/main.87f12bb3.chunk.js",
+    "main.js.map": "/swop-ui/static/js/main.87f12bb3.chunk.js.map",
+    "runtime~main.js": "/swop-ui/static/js/runtime~main.951136ad.js",
+    "runtime~main.js.map": "/swop-ui/static/js/runtime~main.951136ad.js.map",
+    "static/css/2.9ad73318.chunk.css": "/swop-ui/static/css/2.9ad73318.chunk.css",
+    "static/js/2.3a0206ad.chunk.js": "/swop-ui/static/js/2.3a0206ad.chunk.js",
+    "static/js/2.3a0206ad.chunk.js.map": "/swop-ui/static/js/2.3a0206ad.chunk.js.map",
+    "index.html": "/swop-ui/index.html",
+    "precache-manifest.fae646e7307e1f6773c0018e39060311.js": "/swop-ui/precache-manifest.fae646e7307e1f6773c0018e39060311.js",
+    "service-worker.js": "/swop-ui/service-worker.js",
+    "static/css/2.9ad73318.chunk.css.map": "/swop-ui/static/css/2.9ad73318.chunk.css.map",
+    "static/css/main.314a2348.chunk.css.map": "/swop-ui/static/css/main.314a2348.chunk.css.map",
+    "static/media/2.png": "/swop-ui/static/media/2.3328e0b7.png",
+    "static/media/3.png": "/swop-ui/static/media/3.d35c7bf9.png",
+    "static/media/4.png": "/swop-ui/static/media/4.4196c788.png",
+    "static/media/5.png": "/swop-ui/static/media/5.c2f9344f.png",
+    "static/media/air_canada.png": "/swop-ui/static/media/air_canada.af6bcd2e.png",
+    "static/media/index.css": "/swop-ui/static/media/banner.18e4ebbf.png",
+    "static/media/delta.jpg": "/swop-ui/static/media/delta.729c121b.jpg",
+    "static/media/swop-logo.svg": "/swop-ui/static/media/swop-logo.413abe0d.svg",
+    "static/media/westjet.jpg": "/swop-ui/static/media/westjet.f05cae48.jpg"
+  }
+}
