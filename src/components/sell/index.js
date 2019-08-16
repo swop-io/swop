@@ -38,7 +38,7 @@ class SellTicket extends React.Component {
             }
         }
 
-        this.displayForm = this.displayForm.bind(this)
+
         this.displayTicketDetails = this.displayTicketDetails.bind(this)
         this.retrieveTicket = this.retrieveTicket.bind(this)
         this.postTicket = this.postTicket.bind(this)
@@ -88,49 +88,10 @@ class SellTicket extends React.Component {
         this.setState({ ticket : temp })
     }
 
-    displayForm(){
-        return (
-            <div>
-                <div class="columns">
-                    <div class="column">
-                    <p class="title is-5 has-text-weight-light">Retrieve Ticket</p>
-                        <div class="card">
-                            <div class="card-content">
-                            <div class="field">
-                                <p class="control has-icons-left">
-                                    <input class="input" onChange={this.updateInputBooking} placeholder="Enter booking reference"></input>
-                                    <span class="icon is-small is-left">
-                                    <i class="fas fa-lock"></i>
-                                    </span>
-                                </p>
-                                </div>
-                                <div class="field">
-                                <p class="control">
-                                    <button type="button" class="button is-black is-fullwidth"
-                                    onClick={this.retrieveTicket}>
-                                    Retrieve
-                                    </button>
-                                </p>
-                            </div>
-                               
-                            </div>
-                            
-                        </div>
-                    </div>
-
-                    <div class="column is-two-thirds">
-                    <p class="title is-5 has-text-weight-light">Flight Details</p>
-
-                    </div>
-                </div>
-            </div>
-        )
-    }
-
     displayTicketDetails(){
         return (
             <div>
-                <p class="title is-5 has-text-weight-light">Flight Details</p>
+                <p class="title has-text-weight-light">Flight Details</p>
                 <div class="card">
                             <div class="card-content" style={{paddingBottom : 50}}>
 
@@ -175,12 +136,9 @@ class SellTicket extends React.Component {
     render() {
         return (
             <div>
-            
-
-
                 <div class="columns">
                     <div class="column">
-                    <p class="title is-5 has-text-weight-light">Retrieve Ticket</p>
+                    <p class="title has-text-weight-light">Retrieve Ticket</p>
                         <div class="card">
                             <div class="card-content">
                             <div class="field">

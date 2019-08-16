@@ -119,30 +119,33 @@ class TicketDetails extends React.Component {
             <div style={{margin : 10}}>
                 <div class="columns">
                     <div class="column is-two-thirds">
-                    <p class="title is-5">Flight Details</p>
+                    <p class="title has-text-weight-light">Flight Details</p>
 
                         <FlightInfo title="Departing Flight" data={this.state.data.depart}/>
                         <br></br>
                         <FlightInfo title="Return Flight" data={this.state.data.return}/>
-
-                        <p class="title is-5">Bids</p>
+                        <br></br>
+                        <p class="title has-text-weight-light">Bids</p>
                         <div class="box">
 
                         <BidDetails swopRefNo={this.props.match.params.id} database={this.database} ethPrice={this.state.ethPrice}/>
+                        <br></br>
                         <BidHistory swopRefNo={this.props.match.params.id} database={this.database}/>
                         
                         </div>
                     </div>
                     
                     <div class="column">
-                    <p class="title is-5">Payment</p>
+                    <p class="title has-text-weight-light">Payment</p>
                         <div class="card">
                             <div class="card-content">
-                                <p class="title">${this.state.data.amount}</p>
+                                <p class="title is-1">${this.state.data.amount}</p>
                                 <p class="subtitle">{this.state.amountInEth.toFixed(4)} ETH</p>
 
                                 <a class="button is-fullwidth is-black">Purchase</a>
-                                <p>OR</p>
+                      
+                                <p class="has-text-centered">or</p>
+                            
                                 <a class="button is-fullwidth" onClick={this.showHideAuction}>
                                     {this.state.showAuction ? 'Cancel' : 'Join Auction'}
                                 </a>

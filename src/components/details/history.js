@@ -67,7 +67,7 @@ class BidHistory extends React.Component {
     render() {
         return (
             <div>
-                <p>Bid History</p>
+                <p class="subtitle has-text-weight-light">Bid History</p>
                 { this.displayLatestBids() }
             </div>
         )
