@@ -46,7 +46,7 @@ class CardView extends React.Component {
                 </div>
 
                 <footer class="card-footer">
-                <a href={`/swop-ui/details/${this.state.data.swopRefNo}`} class="card-footer-item is-7">View</a>
+                <a href={`/details/${this.state.data.swopRefNo}`} class="card-footer-item is-7">View</a>
                 </footer>
           </div>
         )

@@ -18,7 +18,7 @@ class NavBar extends React.Component {
             <nav class="navbar is-black is-spaced" style={{marginBottom : 40}}>
 
                 <div class="navbar-brand" style={{marginLeft : 110}}>
-                    <a class="navbar-item" href="/swop-ui">
+                    <a class="navbar-item" href="/">
                     <img src={ SwopLogo } style={{width: 50 , height: 200 }}></img>
                     
                     </a>
@@ -28,41 +28,41 @@ class NavBar extends React.Component {
                     <span></span>
                     <span></span>
                     </div>
-                    <a class="navbar-item" href="/swop-ui">
+                    <a class="navbar-item" href="/">
                         How it works
                     </a>
-                    <a class="navbar-item" href="/swop-ui">
+                    <a class="navbar-item" href="/">
                         About
                     </a>
-                    <a class="navbar-item" href="/swop-ui">
+                    <a class="navbar-item" href="/">
                         Partner with Us
                     </a>
                 </div>
 
                 <div id="navbarExampleTransparentExample" class="navbar-menu" style={{marginRight:110}}>
                     <div class="navbar-end">
-                    <Link class="navbar-item" to="/swop-ui/sell">
+                    <Link class="navbar-item" to="/sell">
                         Sell Ticket
                     </Link>
-                    <a class="navbar-item" href="/swop-ui/listings">
+                    <a class="navbar-item" href="/listings">
                         Listings
                     </a>
                     <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link" href="/swop-ui">
+                        <a class="navbar-link" href="/">
                         Account
                         </a>
                         <div class="navbar-dropdown is-boxed ">
-                        <a class="navbar-item" href="/swop-ui">
+                        <a class="navbar-item" href="/">
                             Overview
                         </a>
-                        <a class="navbar-item" href="/swop-ui">
+                        <a class="navbar-item" href="/">
                             Purchases
                         </a>
                         <hr class="navbar-divider"></hr>
-                        <a class="navbar-item" href="/swop-ui">
+                        <a class="navbar-item" href="/">
                             Elements
                         </a>
-                        <a class="navbar-item is-active" href="/swop-ui">
+                        <a class="navbar-item is-active" href="/">
                             Components
                         </a>
                         </div>

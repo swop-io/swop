@@ -16,10 +16,10 @@ function App() {
         <div class="columns">
           <div class="column"></div>
           <div class="column is-three-quarters">
-              <Route exact path = "/swop-ui" component = { Home } />
-              <Route path = "/swop-ui/details/:id" component = { TicketDetails }/>
-              <Route path = "/swop-ui/sell" component = { SellTicket } />
-              <Route path = "/swop-ui/listings" component = { Listings } />
+              <Route exact path = "/" component = { Home } />
+              <Route path = "/details/:id" component = { TicketDetails }/>
+              <Route path = "/sell" component = { SellTicket } />
+              <Route path = "/listings" component = { Listings } />
           </div>
           <div class="column"></div>
         </div>
