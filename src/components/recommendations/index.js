@@ -1,12 +1,15 @@
 import React from 'react'
 import 'bulma'
 import CardView from '../recommendations/card.js'
+import Image2 from '../../images/2.png'
+import Image3 from '../../images/3.png'
+import Image4 from '../../images/4.png'
+import Image5 from '../../images/5.png'
 
 class Recommendations extends React.Component {
 
     constructor(props){
         super(props)
-        console.log(props.list)
         this.state = {
             list : props.list
         }
@@ -20,10 +23,10 @@ class Recommendations extends React.Component {
                 </h1>
                 <ul>
 
-                <li><CardView data={this.state.list[0]}/></li>
-                <li><CardView data={this.state.list[1]}/></li>
-                <li><CardView data={this.state.list[2]}/></li>
-                <li><CardView data={this.state.list[3]}/></li>
+                <li><CardView data = {this.state.list[0]} image= {Image2}/></li>
+                <li><CardView data = {this.state.list[1]} image= {Image3}/></li>
+                <li><CardView data ={this.state.list[2]} image= {Image4}/></li>
+                <li><CardView data = {this.state.list[3]} image= {Image5}/></li>
                 </ul>
 
         
