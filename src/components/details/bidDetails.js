@@ -82,9 +82,9 @@ class BidDetails extends React.Component {
         const plainText = bytes.toString(CryptoJS.enc.Utf8);
 
         let hexSwopRefNo = ethers.utils.formatBytes32String(this.props.swopRefNo);
-        let bytesNonce = ethers.utils.formatBytes32String(this.state.currentNonce + ':nonce');
+        let bytesNonce = ethers.utils.formatBytes32String(`${this.state.currentNonce}:nonce`);
         let amountInWei = ethers.utils.parseEther('' + this.ethConverter.usdToEth(this.state.inputBidAmount))
-        
+
         let message = ethers.utils.concat([
             ethers.utils.hexZeroPad(hexSwopRefNo, 32),
             ethers.utils.hexZeroPad(ethers.utils.hexlify(amountInWei), 32),
