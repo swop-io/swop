@@ -1,5 +1,5 @@
 {
-    "flavor" : "dev",
+    "flavor" : "prod",
     "firebaseConfig" : {
         "apiKey" : "AIzaSyDMQgHzi4QmmxqbtcEmg1QyvZmUAa--SLg",
         "authDomain" : "swop-mvp.firebaseapp.com",
