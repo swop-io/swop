@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "39784f046f90d8db412cfbca7c039928",
+    "revision": "7561afebf96b6713ff61e44632d99d64",
     "url": "/swop-ui/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/swop-ui/static/css/2.9ad73318.chunk.css"
   },
   {
-    "revision": "e9ca01c421d6c67b42e6",
+    "revision": "88a2a4fc27f8408849cc",
     "url": "/swop-ui/static/css/main.314a2348.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/swop-ui/static/js/2.3a0206ad.chunk.js"
   },
   {
-    "revision": "e9ca01c421d6c67b42e6",
-    "url": "/swop-ui/static/js/main.87f12bb3.chunk.js"
+    "revision": "88a2a4fc27f8408849cc",
+    "url": "/swop-ui/static/js/main.21a92470.chunk.js"
   },
   {
     "revision": "3512237febab13f54dab",
