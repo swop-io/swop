@@ -4,6 +4,7 @@ import BlockchainClient from '../../data/blockchain'
 import EthConverter from '../../utils/converter'
 import AirCanada from '../../images/air_canada.png'
 import Delta from '../../images/delta.jpg'
+import WestJet from '../../images/westjet.jpg'
 
 class ListingItem extends React.Component {
 
