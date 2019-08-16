@@ -141,7 +141,9 @@ class SellTicket extends React.Component {
         
                             <div class="field">
                                 <p class="control has-icons-left">
-                                    <input class="input" onChange={this.updateMaxAskAmount} placeholder="Enter maximum asking amount"></input>
+                                    <input class="input" onChange={this.updateMaxAskAmount} 
+                                            value={this.state.ticket.amount}
+                                            placeholder="Enter maximum asking amount"></input>
                                     <span class="icon is-small is-left">
                                     <i class="fas fa-lock"></i>
                                     </span>
