@@ -1,7 +1,10 @@
 import React from 'react'
 import 'bulma'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { faPlaneDeparture } from '@fortawesome/free-solid-svg-icons'
+import { faEthereum } from '@fortawesome/free-brands-svg-icons'
+import { faDollarSign } from '@fortawesome/free-solid-svg-icons'
+import { faPlane } from '@fortawesome/free-solid-svg-icons'
 import EthConverter from '../../utils/converter'
 
 class CardView extends React.Component {
@@ -25,24 +28,20 @@ class CardView extends React.Component {
                 </div>
                 <div class="card-content">
                     <p class="title has-text-weight-light">
-                    {/* <FontAwesomeIcon icon={faCoffee} /> */}
                         to {this.state.data.depart.destination}
                     </p>
-                    <p class="is-size-4 has-text-weight-light">
-                        ${this.state.data.amount} 
+                    <p class="is-size-4 has-text-weight-bold">
+                        <FontAwesomeIcon icon={faDollarSign}/> {this.state.data.amount} 
                     </p>
                     <p class="is-size-6 has-text-weight-light">
-                        {this.ethConverter.usdToEth(this.state.data.amount)} ETH
+                        <FontAwesomeIcon icon={faEthereum} style={{marginRight : 5}}/> {this.ethConverter.usdToEth(this.state.data.amount)}
                     </p>
                     <br></br>
                     <p class="is-size-6 has-text-weight-light">
-                        {this.state.data.depart.departureDateTime}
+                        <FontAwesomeIcon icon={faPlaneDeparture} style={{marginRight : 10}} /> {this.state.data.depart.departureDateTime}
                     </p>
                     <p class="is-size-6 has-text-weight-light">
-                        {this.state.data.return.departureDateTime}
-                    </p>
-                    <p class="is-size-6 has-text-weight-light">
-                        {this.state.data.airline}
+                        <FontAwesomeIcon icon={faPlane} style={{marginRight : 10}} /> {this.state.data.airline}
                     </p>
                 </div>
 
