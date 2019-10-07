@@ -11,6 +11,8 @@ import APIService from '../../data/remote'
 import * as firebase from "firebase";
 import config from '../../config/config.json'
 import EthConverter from '../../utils/converter'
+import BlockchainClient from '../../data/blockchain/index'
+import web3Obj from '../../data/blockchain/helper'
 
 class TicketDetails extends React.Component {
 
@@ -49,9 +51,11 @@ class TicketDetails extends React.Component {
 
         this.showHideAuction = this.showHideAuction.bind(this)
         this.checkWalletStatus = this.checkWalletStatus.bind(this)
+        this.purchaseTicket = this.purchaseTicket.bind(this)
 
         this.apiService = new APIService()
         this.ethConverter = new EthConverter()
+        this.blockchainClient = new BlockchainClient()
         firebase.initializeApp(config.firebaseConfig);
         this.database = firebase.app().database()
       
@@ -100,20 +104,37 @@ class TicketDetails extends React.Component {
     }
     
     checkWalletStatus(){
-        if(typeof(Storage) !== "undefined"){
-            let pk = localStorage.getItem(Constants.LS_KEY_PK) 
-            if(pk === null || pk === 'undefined'){
-                this.setState({hasAccountSetup : false})
-            }else{
-                this.setState({hasAccountSetup : true})
-            }
+        const isTorus = sessionStorage.getItem('pageUsingTorus')
+
+        if (isTorus) {
+            this.setState({hasAccountSetup : true})
         }else{
-            console.log('web storage not supported')
+            this.setState({hasAccountSetup : false})
         }
+
     }
 
+    enableTorus = async () =>{
+        try {
+          await web3Obj.initialize()
+          this.setStateInfo()
+        } catch (error) {
+          console.error(error)
+        }
+      }
 
+      setStateInfo = () => {
+        web3Obj.web3.eth.getAccounts().then(accounts => {
+          console.log('pasok kp::' + accounts[0])
+          this.checkWalletStatus()
+          this.blockchainClient.initContracts()
 
+        })
+      }
+
+    purchaseTicket(){
+        this.blockchainClient.buyTicket(this.props.match.params.id, this.state.amountInEth)
+    }
     render() {
         return (
             <div style={{margin : 10}}>
@@ -142,11 +163,15 @@ class TicketDetails extends React.Component {
                                 <p class="title is-1">${this.state.data.amount}</p>
                                 <p class="subtitle">{this.state.amountInEth.toFixed(4)} ETH</p>
 
-                                <a class="button is-fullwidth is-black">Purchase</a>
+                                <a class="button is-fullwidth is-black" 
+                                    onClick={this.purchaseTicket}
+                                  disabled={!this.state.hasAccountSetup}>Purchase</a>
                       
                                 <p class="has-text-centered">or</p>
                             
-                                <a class="button is-fullwidth" onClick={this.showHideAuction}>
+                                <a class="button is-fullwidth" 
+                                    disabled={!this.state.hasAccountSetup}
+                                    onClick={this.showHideAuction}>
                                     {this.state.showAuction ? 'Cancel' : 'Join Auction'}
                                 </a>
 
@@ -159,6 +184,11 @@ class TicketDetails extends React.Component {
                                     
                                     }
                                
+                               <br></br>
+                               <br></br>
+                               <a class="button is-fullwidth" onClick={this.enableTorus}>
+                                    TORUS LOGIN
+                                </a>
                             </div>
                             
                         </div>

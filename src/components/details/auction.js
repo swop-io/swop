@@ -4,6 +4,7 @@ import Constants from '../../utils/constants'
 import Deposit from './deposit'
 import { keccak512 } from 'js-sha3';
 import CryptoJS from 'crypto-js';
+import BlockchainClient from '../../data/blockchain/index'
 
 class AuctionSetup extends React.Component {
 
@@ -18,6 +19,7 @@ class AuctionSetup extends React.Component {
         this.storeWallet = this.storeWallet.bind(this)
         this.updateInputPK = this.updateInputPK.bind(this)
         this.updateInputPW = this.updateInputPW.bind(this)
+        this.blockchainClient = new BlockchainClient()
     }
 
     updateInputPK(e){
@@ -29,17 +31,18 @@ class AuctionSetup extends React.Component {
     }
 
     storeWallet(){
-        if(typeof(Storage) !== "undefined"){
+        this.blockchainClient.enableTorus()
+        // if(typeof(Storage) !== "undefined"){
 
-            const hashKey = keccak512(this.state.inputPW)
-            const encryptedPK = CryptoJS.AES.encrypt(this.state.inputPK, hashKey);
+        //     const hashKey = keccak512(this.state.inputPW)
+        //     const encryptedPK = CryptoJS.AES.encrypt(this.state.inputPK, hashKey);
 
-            localStorage.setItem(Constants.LS_KEY_PK, encryptedPK)
-            localStorage.setItem(Constants.LS_KEY_PASSWORD, hashKey)
-            this.setState({hasAccountSetup : true})
-        }else{
-            console.log('browser not support web storage')
-        }
+        //     localStorage.setItem(Constants.LS_KEY_PK, encryptedPK)
+        //     localStorage.setItem(Constants.LS_KEY_PASSWORD, hashKey)
+        //     this.setState({hasAccountSetup : true})
+        // }else{
+        //     console.log('browser not support web storage')
+        // }
     }
 
     render() {
@@ -50,7 +53,7 @@ class AuctionSetup extends React.Component {
 
                     <div>
                         <p>Import Wallet </p>
-                        <div class="field">
+                        {/* <div class="field">
                         <p class="control has-icons-left has-icons-right">
                             <input class="input" onChange={this.updateInputPK} placeholder="Enter private key" required></input>
                             <span class="icon is-small is-left">
@@ -68,7 +71,7 @@ class AuctionSetup extends React.Component {
                             <i class="fas fa-lock"></i>
                             </span>
                         </p>
-                        </div>
+                        </div> */}
                         <div class="field">
                         <p class="control">
                             <button class="button is-black is-fullwidth" onClick={this.storeWallet}>

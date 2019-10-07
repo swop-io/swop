@@ -12,12 +12,12 @@ const web3Obj = {
     const torus = new Torus()
     // await torus.init()
     await torus.init({
-        buildEnv: 'production', // default: production
+        buildEnv: 'dev', // default: production
         enableLogging: true, // default: false
         network: {
-          host: 'kovan', // default: mainnet
-          chainId: 42, // default: 1
-          networkName: 'Kovan Test Network' // default: Main Ethereum Network
+          host: 'ropsten', // default: mainnet
+          chainId: 3, // default: 1
+          networkName: 'Ropsten Test Network' // default: Main Ethereum Network
         },
         showTorusButton: true // default: true
       });

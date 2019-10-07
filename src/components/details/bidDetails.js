@@ -6,6 +6,7 @@ import * as ethers from 'ethers';
 import APIService from '../../data/remote'
 import Blockchain from '../../data/blockchain'
 import EthConverter from '../../utils/converter'
+import web3Obj from '../../data/blockchain/helper'
 
 class BidDetails extends React.Component {
 
@@ -20,7 +21,7 @@ class BidDetails extends React.Component {
             lowestAskAmount : 0,
             lowestAskEth : 0,
             isEnabled : false,
-            isBidder : false
+            isBidder : true
 
         }
         this.placeBid = this.placeBid.bind(this)
@@ -33,9 +34,9 @@ class BidDetails extends React.Component {
     }
 
     componentWillMount(){
-        this.blockchain.isBidder(this.props.swopRefNo).then(res => {
-            this.setState({isBidder : res})
-        })
+        // this.blockchain.isBidder(this.props.swopRefNo).then(res => {
+        //     this.setState({isBidder : res})
+        // })
     }
 
     componentDidMount(){
@@ -76,10 +77,10 @@ class BidDetails extends React.Component {
 
 
     async placeBid(){
-        const encryptedPK = localStorage.getItem(Constants.LS_KEY_PK);
-        const hashKey = localStorage.getItem(Constants.LS_KEY_PASSWORD)
-        const bytes = CryptoJS.AES.decrypt(encryptedPK, hashKey);
-        const plainText = bytes.toString(CryptoJS.enc.Utf8);
+        // const encryptedPK = localStorage.getItem(Constants.LS_KEY_PK);
+        // const hashKey = localStorage.getItem(Constants.LS_KEY_PASSWORD)
+        // const bytes = CryptoJS.AES.decrypt(encryptedPK, hashKey);
+        // const plainText = bytes.toString(CryptoJS.enc.Utf8);
 
         let hexSwopRefNo = ethers.utils.formatBytes32String(this.props.swopRefNo);
         let bytesNonce = ethers.utils.formatBytes32String(`${this.state.currentNonce}:nonce`);
@@ -93,8 +94,13 @@ class BidDetails extends React.Component {
 
         let messageHash = ethers.utils.keccak256(message)
 
-        let wallet = new ethers.Wallet(plainText)
-        let sig = await wallet.signMessage(ethers.utils.arrayify(messageHash));
+        let provider = new ethers.providers.Web3Provider(web3Obj.web3.currentProvider)
+        let signer = provider.getSigner()
+        let sig = await signer.signMessage(ethers.utils.arrayify(messageHash))
+
+
+        // let wallet = new ethers.Wallet(plainText)
+        // let sig = await wallet.signMessage(ethers.utils.arrayify(messageHash));
         let splitSig = ethers.utils.splitSignature(sig);
     
         console.log(`r: ${splitSig.r}`);
@@ -104,7 +110,7 @@ class BidDetails extends React.Component {
         let param = {
             swopRefNo : this.props.swopRefNo,
             bidAmount : this.state.inputBidAmount,
-            user : wallet.address,
+            user : sessionStorage.getItem('selectedAddress'),
             signature : {
                 r : splitSig.r,
                 s : splitSig.s,

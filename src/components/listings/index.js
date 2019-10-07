@@ -28,7 +28,7 @@ class Listings extends React.Component {
     }
 
     loadList(){
-        let address = window.web3.eth.accounts[0].toLowerCase()
+        let address = sessionStorage.getItem('selectedAddress')
         let listingsRef = this.database.ref(`listings/${address}`)
 
         listingsRef.once('value', snapshot => {

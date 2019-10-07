@@ -24,7 +24,7 @@ class ListingItem extends React.Component {
     }
 
     componentWillMount(){
-        this.loadWinningBidder()
+        // this.loadWinningBidder()
     }
     componentDidMount(){
         this.setState({ isLoading : true})
@@ -120,12 +120,12 @@ class ListingItem extends React.Component {
                             onClick={this.placeBid}
                             style={{marginTop : 8}}>Cancel</button>
 
-                    { !this.state.winningBidder.startsWith('0x000000') ? 
+                    {/* { !this.state.winningBidder.startsWith('0x000000') ? 
                      <p class="subtitle is-7" style={{marginTop : 8}}>Winning Bidder:  
                             {this.state.winningBidder.substring(0,10)}...
                             {this.state.winningBidder.substring(this.state.winningBidder.length - 6)}
                     </p> : ""
-                    }
+                    } */}
                    
                     </div>
                 </div>
